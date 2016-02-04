@@ -1,0 +1,825 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<bizModel _AutoID="ae680bd6-950c-4691-b434-9e7e2e65ce50"
+		TableName="T_OA_MT_Rules_Manage" TableNameCn="医疗规章制度管理" ParentName=""
+		TableCat="000100010002" TableType="1" DataLog="0" ConnectionId=""
+		DataLogTmpl="" DeleteMode="0" ShowState="1" ArchiveState="0"
+		OrderField="" FormWidth="" EditMode="" InitRows="0">
+		<ListSQL><![CDATA[select * from T_OA_MT_Rules_Manage where |^condition^| |^sortdir^|]]></ListSQL>
+		<DetailSQL><![CDATA[select * from T_OA_MT_Rules_Manage where |^condition^|]]></DetailSQL>
+		<ListScriptBlock><![CDATA[function app_add(cmd,grid)
+{
+   openCenter("../workflow/NewFlow.aspx?workflowCode=MT_Rules_Manage","_blank",1000,700);
+}]]></ListScriptBlock>
+		<ListPreProcessFn><![CDATA[]]>
+		</ListPreProcessFn>
+		<EditScriptBlock><![CDATA[jQuery(function()
+{
+  var back=_sys.getValue("Back");
+  if(back == "1" && _nodeCode=="A2")
+  {
+  	$("#trpath").show();
+  }
+  
+  cellphone($("input03").val());
+  $("input:radio[name='input013']").change(function(){fz();}).change();
+  
+});
+function cellphone(empcode) 
+{
+  var cellphone=_curClass.ExecSQL("select_cellphone","@empcode="+empcode).value;
+  if(!!cellphone) $("#input04").val(cellphone);
+}
+
+function select_applyNo()   //医疗规章制度管理自动生成单号
+{
+  	 var valnumtemp="YLGZ";
+     var keys=[];
+     keys.push("@cglx="+valnumtemp);
+     keys.push("@num=4");
+     var no=_curClass.ExecSQL("select_applyNo",keys.join("|")).value;
+     $("#input011").val(no).css("color","blue");
+     //再次触发任务名称change事件
+     jQuery("row:first", _xmlData).find("ApplyNo").text(no);
+     $("#input011").change();
+}
+function _sysBeforeSave()
+{
+   if(_isNew)
+   {
+      select_applyNo();
+   }
+   return true;
+}
+function fz() 
+{
+   var val=$('input:radio[name="input013"]:checked').val();
+   if(!!val)
+   {
+      if(val=="是")
+         $(".nextTask").show();
+      else
+         $(".nextTask").hide();
+   }
+}
+]]></EditScriptBlock>
+		<FormHtml><![CDATA[<style><!--
+#input011 {
+	BORDER-BOTTOM: gray solid; BORDER-LEFT: gray 0px solid; PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; WIDTH: 96px;  FLOAT: none; HEIGHT: 16px; COLOR: blue; BORDER-TOP: gray 0px solid; BORDER-RIGHT: gray 0px solid; PADDING-TOP: 0px
+}
+--></style>
+
+<div style="text-align: right; ">申请单号:{T_OA_MT_Rules_Manage.ApplyNo}</div>
+<table class="normaltbl" border="1" align="center" sizset="0" sizcache="2">
+  <caption style="background: #D6E8FC;" class=" ">医疗规章制度申请单</caption>
+<tbody sizset="0" sizcache="2">
+<tr>
+<td style="text-align: center; background: #F6F8F9;" height="25" width="15%">科室</td>
+<td width="35%">{T_OA_MT_Rules_Manage.DeptName}</td>
+<td style="text-align: center; background: #F6F8F9;" height="25" width="15%">姓名</td>
+<td width="35%">{T_OA_MT_Rules_Manage.EmployeeName}</td>
+</tr>
+<tr>
+<td style="text-align: center; background: #F6F8F9;" width="15%">工号</td>
+<td width="35%">{T_OA_MT_Rules_Manage.EmployeeNo}</td>
+<td style="text-align: center; background: #F6F8F9;" width="15%">联系电话</td>
+<td width="35%">{T_OA_MT_Rules_Manage.Cellphone}</td>
+</tr>
+<tr>
+<td style="text-align: center; background: #F6F8F9;" height="25" width="15%">上传附件</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.Accessories}</td>
+</tr>
+<tr style="display: none;" class="wyhsc">
+<td style="text-align: center; background: #F6F8F9;" height="25" width="15%">委员会委员附件上传</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.CommitteeAccessories}</td>
+</tr>
+<tr style="display: none;" class="ywccl">
+<td style="text-align: center; background: #F6F8F9;" height="25" width="15%">医务处附件上传</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.MedicalAccessories}</td>
+</tr>
+<tr>
+<td style="text-align: center; background: #F6F8F9;" height="25" width="15%">备注</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.Remark}{T_OA_MT_Rules_Manage.Back}</td>
+</tr>
+  <tr id="trpath" class="hidden">
+<td style="text-align: center; background: #F6F8F9;" height="25" width="15%">下一个处理人</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.PathFlag}</td>
+</tr>
+</tbody>
+</table>
+
+<div style="clear: both;" class="hidden">{T_OA_MT_Rules_Manage.DeptId}</div>]]></FormHtml>
+		<FormHtml2><![CDATA[<p>申请单号:{T_OA_MT_Rules_Manage.ApplyNo}</p>
+<p>科室:{T_OA_MT_Rules_Manage.DeptName}</p>
+<p>姓名:{T_OA_MT_Rules_Manage.EmployeeName}</p>
+<p>工号:{T_OA_MT_Rules_Manage.EmployeeNo}</p>
+<p>联系电话:{T_OA_MT_Rules_Manage.Cellphone}</p>
+<p>上传附件:{T_OA_MT_Rules_Manage.Accessories}</p>
+<p>备注:{T_OA_MT_Rules_Manage.Remark}{T_OA_MT_Rules_Manage.Back}</p>
+<p>下一个处理人:{T_OA_MT_Rules_Manage.PathFlag}</p>
+<div class="hidden" style="clear: both;">{T_OA_MT_Rules_Manage.DeptId}</div>]]></FormHtml2>
+		<PrintHtml><![CDATA[]]>
+		</PrintHtml>
+		<DetailHtml><![CDATA[<style><!--
+#input011 {
+	BORDER-BOTTOM: gray solid; BORDER-LEFT: gray 0px solid; PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; WIDTH: 96px;  FLOAT: none; HEIGHT: 16px; COLOR: blue; BORDER-TOP: gray 0px solid; BORDER-RIGHT: gray 0px solid; PADDING-TOP: 0px
+}
+--></style>
+<div style="text-align: right;">申请单号:{T_OA_MT_Rules_Manage.ApplyNo}</div>
+<table align="center" class="normaltbl" border="1" sizcache="2" sizset="0"><caption class=" " style="background: #D6E8FC;">医疗规章制度申请单</caption>
+<tbody sizcache="2" sizset="0">
+<tr>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">科室</td>
+<td width="35%">{T_OA_MT_Rules_Manage.DeptName}</td>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">姓名</td>
+<td width="35%">{T_OA_MT_Rules_Manage.EmployeeName}</td>
+</tr>
+<tr>
+<td width="15%" style="text-align: center; background: #F6F8F9;">工号</td>
+<td width="35%">{T_OA_MT_Rules_Manage.EmployeeNo}</td>
+<td width="15%" style="text-align: center; background: #F6F8F9;">联系电话</td>
+<td width="35%">{T_OA_MT_Rules_Manage.Cellphone}</td>
+</tr>
+<tr>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">上传附件</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.Accessories}</td>
+</tr>
+<tr>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">委员会委员附件上传</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.CommitteeAccessories}</td>
+</tr>
+<tr>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">医务处附件上传</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.MedicalAccessories}</td>
+</tr>
+<tr>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">备注</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.Remark}{T_OA_MT_Rules_Manage.Back}</td>
+</tr>
+</table>
+<table class="subtbl" border="1" align="center" id="T_OA_MT_Metting">
+<caption><span>&nbsp;上院务会</span></caption>
+<thead>
+<tr>
+<td style="width: 30px;" class="subtbltd">序号</td>
+<td class="subtbltd">说明</td>
+<td class="subtbltd">上传附件</td>
+<td class="ADDBTN subtbltd">[#ADD#]</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{ORDER}</td>
+<td>{EXPLAIN}</td>
+<td>{METTINGACCESSORIE}</td>
+<td class="DELBTN">[#DEL#]</td>
+</tr>
+</tbody>
+</table>
+<div class="hidden" style="clear: both;">{T_OA_MT_Rules_Manage.DeptId}{ORDER}{EXPLAIN}{METTINGACCESSORIE}</div>]]></DetailHtml>
+		<Fields>
+			<Field _AutoID="ef5246f8-7b35-485d-b671-3e5a34398f3d"
+				TableName="T_OA_MT_Rules_Manage" FieldName="DeptName" FieldNameCn="科室"
+				FieldOdr="1" FieldType="1" FieldLength="50" FieldInDisp="1"
+				FieldRead="1" FieldNull="0" FieldWidth="" FieldHeight=""
+				FieldDValueType="TopDeptName" FieldDValue="" FieldInDispStyle=""
+				FieldInDispStyleTxt="" FieldInDispStyleName="默认样式" FieldInFilter=""
+				IsComput="0" IsUnique="0" ListDisp="1" QueryDisp="1" ColumnAlign=""
+				ColumnWidth="93" ColumnOrder="3" ColumnHidden="0" QueryOrder="0"
+				ColumnRender="" ColFormatExp="" ColTotalExp="" QueryMatchMode="1"
+				QueryDefaultType="Custom" QueryDefaultValue=" " QueryStyle=""
+				QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="19a8a71c-5122-4ebd-88ac-c3d40cb9d227"
+				TableName="T_OA_MT_Rules_Manage" FieldName="EmployeeName"
+				FieldNameCn="姓名" FieldOdr="2" FieldType="1" FieldLength="50"
+				FieldInDisp="1" FieldRead="1" FieldNull="0" FieldWidth=""
+				FieldHeight="" FieldDValueType="EmployeeName" FieldDValue=""
+				FieldInDispStyle="" FieldInDispStyleTxt="" FieldInDispStyleName=""
+				FieldInFilter="" IsComput="0" IsUnique="0" ListDisp="1" QueryDisp="1"
+				ColumnAlign="" ColumnWidth="80" ColumnOrder="1" ColumnHidden="0"
+				QueryOrder="0" ColumnRender="" ColFormatExp="" ColTotalExp=""
+				QueryMatchMode="" QueryDefaultType="" QueryDefaultValue=""
+				QueryStyle="" QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="b36eefd9-6b46-4a80-8d1e-00add42330a4"
+				TableName="T_OA_MT_Rules_Manage" FieldName="EmployeeNo" FieldNameCn="工号"
+				FieldOdr="3" FieldType="1" FieldLength="50" FieldInDisp="1"
+				FieldRead="1" FieldNull="0" FieldWidth="" FieldHeight=""
+				FieldDValueType="LoginName" FieldDValue="" FieldInDispStyle=""
+				FieldInDispStyleTxt="" FieldInDispStyleName="" FieldInFilter=""
+				IsComput="0" IsUnique="0" ListDisp="1" QueryDisp="0" ColumnAlign=""
+				ColumnWidth="80" ColumnOrder="2" ColumnHidden="0" QueryOrder="0"
+				ColumnRender="" ColFormatExp="" ColTotalExp="" QueryMatchMode=""
+				QueryDefaultType="" QueryDefaultValue="" QueryStyle=""
+				QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="badc6c46-086f-456e-9e49-9943637a2a74"
+				TableName="T_OA_MT_Rules_Manage" FieldName="Cellphone" FieldNameCn="联系电话"
+				FieldOdr="4" FieldType="1" FieldLength="50" FieldInDisp="1"
+				FieldRead="0" FieldNull="1" FieldWidth="" FieldHeight=""
+				FieldDValueType="" FieldDValue="" FieldInDispStyle=""
+				FieldInDispStyleTxt="" FieldInDispStyleName="" FieldInFilter=""
+				IsComput="0" IsUnique="0" ListDisp="1" QueryDisp="0" ColumnAlign=""
+				ColumnWidth="99" ColumnOrder="4" ColumnHidden="0" QueryOrder="0"
+				ColumnRender="" ColFormatExp="" ColTotalExp="" QueryMatchMode=""
+				QueryDefaultType="" QueryDefaultValue="" QueryStyle=""
+				QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="80381193-099d-43f2-9958-97af4fe26e15"
+				TableName="T_OA_MT_Rules_Manage" FieldName="Date" FieldNameCn="填写日期"
+				FieldOdr="5" FieldType="4" FieldLength="" FieldInDisp="1" FieldRead="1"
+				FieldNull="0" FieldWidth="" FieldHeight="" FieldDValueType="Date"
+				FieldDValue="" FieldInDispStyle="001" FieldInDispStyleTxt="yyyy-MM-dd|||0"
+				FieldInDispStyleName="日期时间格式" FieldInFilter="" IsComput="0"
+				IsUnique="0" ListDisp="1" QueryDisp="0" ColumnAlign="" ColumnWidth="109"
+				ColumnOrder="5" ColumnHidden="0" QueryOrder="0" ColumnRender=""
+				ColFormatExp="" ColTotalExp="" QueryMatchMode="" QueryDefaultType=""
+				QueryDefaultValue="" QueryStyle="" QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="22aadca4-2839-4b7e-8e28-499e56c1d706"
+				TableName="T_OA_MT_Rules_Manage" FieldName="DeptId" FieldNameCn="科室id"
+				FieldOdr="7" FieldType="1" FieldLength="50" FieldInDisp="1"
+				FieldRead="0" FieldNull="0" FieldWidth="" FieldHeight=""
+				FieldDValueType="TopDeptCode" FieldDValue="" FieldInDispStyle=""
+				FieldInDispStyleTxt="" FieldInDispStyleName="" FieldInFilter=""
+				IsComput="0" IsUnique="0" ListDisp="0" QueryDisp="0" ColumnAlign=""
+				ColumnWidth="80" ColumnOrder="7" ColumnHidden="0" QueryOrder="0"
+				ColumnRender="" ColFormatExp="" ColTotalExp="" QueryMatchMode=""
+				QueryDefaultType="" QueryDefaultValue="" QueryStyle=""
+				QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="ca604da0-51c9-4da8-b73b-89f20cc66433"
+				TableName="T_OA_MT_Rules_Manage" FieldName="Accessories"
+				FieldNameCn="上传附件" FieldOdr="8" FieldType="1" FieldLength="50"
+				FieldInDisp="1" FieldRead="0" FieldNull="1" FieldWidth=""
+				FieldHeight="" FieldDValueType="" FieldDValue="" FieldInDispStyle="023"
+				FieldInDispStyleTxt="||1|0|1" FieldInDispStyleName="多附件上传"
+				FieldInFilter="" IsComput="0" IsUnique="0" ListDisp="0" QueryDisp="0"
+				ColumnAlign="" ColumnWidth="80" ColumnOrder="8" ColumnHidden="0"
+				QueryOrder="0" ColumnRender="" ColFormatExp="" ColTotalExp=""
+				QueryMatchMode="" QueryDefaultType="" QueryDefaultValue=""
+				QueryStyle="" QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="de69bdac-47e3-49b8-a405-fdc544913095"
+				TableName="T_OA_MT_Rules_Manage" FieldName="CommitteeAccessories"
+				FieldNameCn="委员会委员附件上传" FieldOdr="9" FieldType="1" FieldLength="50"
+				FieldInDisp="1" FieldRead="0" FieldNull="0" FieldWidth=""
+				FieldHeight="" FieldDValueType="" FieldDValue="" FieldInDispStyle="023"
+				FieldInDispStyleTxt="||1|0|1" FieldInDispStyleName="多附件上传"
+				FieldInFilter="" IsComput="0" IsUnique="0" ListDisp="0" QueryDisp="0"
+				ColumnAlign="" ColumnWidth="80" ColumnOrder="9" ColumnHidden="0"
+				QueryOrder="0" ColumnRender="" ColFormatExp="" ColTotalExp=""
+				QueryMatchMode="" QueryDefaultType="" QueryDefaultValue=""
+				QueryStyle="" QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="5728b5b0-e4f1-4b7a-a2ac-24709e6d21fd"
+				TableName="T_OA_MT_Rules_Manage" FieldName="Remark" FieldNameCn="备注"
+				FieldOdr="10" FieldType="1" FieldLength="50" FieldInDisp="1"
+				FieldRead="0" FieldNull="0" FieldWidth="" FieldHeight=""
+				FieldDValueType="" FieldDValue="" FieldInDispStyle="020"
+				FieldInDispStyleTxt="3" FieldInDispStyleName="普通多行文本框"
+				FieldInFilter="" IsComput="0" IsUnique="0" ListDisp="1" QueryDisp="0"
+				ColumnAlign="" ColumnWidth="80" ColumnOrder="6" ColumnHidden="0"
+				QueryOrder="0" ColumnRender="" ColFormatExp="" ColTotalExp=""
+				QueryMatchMode="" QueryDefaultType="" QueryDefaultValue=""
+				QueryStyle="" QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="96b92b46-e292-4879-a017-daafff4b5e8d"
+				TableName="T_OA_MT_Rules_Manage" FieldName="ApplyNo" FieldNameCn="申请单号"
+				FieldOdr="11" FieldType="1" FieldLength="50" FieldInDisp="1"
+				FieldRead="0" FieldNull="0" FieldWidth="" FieldHeight=""
+				FieldDValueType="" FieldDValue="" FieldInDispStyle=""
+				FieldInDispStyleTxt="" FieldInDispStyleName="" FieldInFilter=""
+				IsComput="0" IsUnique="0" ListDisp="1" QueryDisp="0" ColumnAlign=""
+				ColumnWidth="80" ColumnOrder="0" ColumnHidden="0" QueryOrder="0"
+				ColumnRender="" ColFormatExp="" ColTotalExp="" QueryMatchMode=""
+				QueryDefaultType="" QueryDefaultValue="" QueryStyle=""
+				QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="6695291c-b386-44c6-9817-59b24139a5f0"
+				TableName="T_OA_MT_Rules_Manage" FieldName="PathFlag" FieldNameCn="下一个处理人"
+				FieldOdr="13" FieldType="1" FieldLength="5" FieldInDisp="1"
+				FieldRead="0" FieldNull="1" FieldWidth="" FieldHeight=""
+				FieldDValueType="Custom" FieldDValue="是" FieldInDispStyle="041"
+				FieldInDispStyleTxt="0,1,,0`院务会审批|是,直接结束|否" FieldInDispStyleName="Radio自定义值"
+				FieldInFilter="" IsComput="0" IsUnique="0" ListDisp="1" QueryDisp="0"
+				ColumnAlign="" ColumnWidth="80" ColumnOrder="7" ColumnHidden="0"
+				QueryOrder="0" ColumnRender="" ColFormatExp="" ColTotalExp=""
+				QueryMatchMode="" QueryDefaultType="" QueryDefaultValue=""
+				QueryStyle="" QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="b8fd936c-8a2b-48fd-b06a-402d6c1f8ec1"
+				TableName="T_OA_MT_Rules_Manage" FieldName="Back" FieldNameCn="回退"
+				FieldOdr="14" FieldType="1" FieldLength="5" FieldInDisp="0"
+				FieldRead="0" FieldNull="0" FieldWidth="" FieldHeight=""
+				FieldDValueType="" FieldDValue="" FieldInDispStyle=""
+				FieldInDispStyleTxt="" FieldInDispStyleName="" FieldInFilter=""
+				IsComput="0" IsUnique="0" ListDisp="1" QueryDisp="0" ColumnAlign=""
+				ColumnWidth="80" ColumnOrder="8" ColumnHidden="0" QueryOrder="0"
+				ColumnRender="" ColFormatExp="" ColTotalExp="" QueryMatchMode=""
+				QueryDefaultType="" QueryDefaultValue="" QueryStyle=""
+				QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="08aeb63e-8072-4fc3-afe4-5a7ae8536480"
+				TableName="T_OA_MT_Rules_Manage" FieldName="MedicalAccessories"
+				FieldNameCn="医务处附件上传" FieldOdr="15" FieldType="1" FieldLength="50"
+				FieldInDisp="1" FieldRead="0" FieldNull="0" FieldWidth=""
+				FieldHeight="" FieldDValueType="" FieldDValue="" FieldInDispStyle="023"
+				FieldInDispStyleTxt="||1|0|1" FieldInDispStyleName="多附件上传"
+				FieldInFilter="" IsComput="0" IsUnique="0" ListDisp="1" QueryDisp="0"
+				ColumnAlign="" ColumnWidth="80" ColumnOrder="15" ColumnHidden="0"
+				QueryOrder="0" ColumnRender="" ColFormatExp="" ColTotalExp=""
+				QueryMatchMode="" QueryDefaultType="" QueryDefaultValue=""
+				QueryStyle="" QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="14278cd0-801b-4464-97d8-2abe4c6bca2b"
+				TableName="T_OA_MT_Rules_Manage" FieldName="MettingAccessories"
+				FieldNameCn="院务会附件上传" FieldOdr="16" FieldType="1" FieldLength="50"
+				FieldInDisp="1" FieldRead="0" FieldNull="0" FieldWidth=""
+				FieldHeight="" FieldDValueType="" FieldDValue="" FieldInDispStyle="023"
+				FieldInDispStyleTxt="||1|0|1" FieldInDispStyleName="多附件上传"
+				FieldInFilter="" IsComput="0" IsUnique="0" ListDisp="1" QueryDisp="0"
+				ColumnAlign="" ColumnWidth="80" ColumnOrder="16" ColumnHidden="0"
+				QueryOrder="0" ColumnRender="" ColFormatExp="" ColTotalExp=""
+				QueryMatchMode="" QueryDefaultType="" QueryDefaultValue=""
+				QueryStyle="" QueryStyleName="" QueryStyleTxt="" />
+		</Fields>
+		<FieldEvents />
+		<TableStyles>
+			<TableStyle StyleIndex="1" StyleName="委员会"
+				TableName="T_OA_MT_Rules_Manage">
+				<FormHtml><![CDATA[<style><!--
+#input011 {
+	BORDER-BOTTOM: gray solid; BORDER-LEFT: gray 0px solid; PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; WIDTH: 96px;  FLOAT: none; HEIGHT: 16px; COLOR: blue; BORDER-TOP: gray 0px solid; BORDER-RIGHT: gray 0px solid; PADDING-TOP: 0px
+}
+--></style>
+
+<div style="text-align: right; ">申请单号:{T_OA_MT_Rules_Manage.ApplyNo}</div>
+<table class="normaltbl" border="1" align="center" sizset="0" sizcache="2">
+  <caption style="background: #D6E8FC;" class=" ">医疗规章制度申请单</caption>
+<tbody sizset="0" sizcache="2">
+<tr>
+<td style="text-align: center; background: #F6F8F9;" height="25" width="15%">科室</td>
+<td width="35%">{T_OA_MT_Rules_Manage.DeptName}</td>
+<td style="text-align: center; background: #F6F8F9;" height="25" width="15%">姓名</td>
+<td width="35%">{T_OA_MT_Rules_Manage.EmployeeName}</td>
+</tr>
+<tr>
+<td style="text-align: center; background: #F6F8F9;" width="15%">工号</td>
+<td width="35%">{T_OA_MT_Rules_Manage.EmployeeNo}</td>
+<td style="text-align: center; background: #F6F8F9;" width="15%">联系电话</td>
+<td width="35%">{T_OA_MT_Rules_Manage.Cellphone}</td>
+</tr>
+<tr>
+<td style="text-align: center; background: #F6F8F9;" height="25" width="15%">上传附件</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.Accessories}</td>
+</tr>
+<tr>
+<td style="text-align: center; background: #F6F8F9;" height="25" width="15%">委员会委员附件上传</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.CommitteeAccessories}</td>
+</tr>
+<tr>
+<td style="text-align: center; background: #F6F8F9;" height="25" width="15%">备注</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.Remark}{T_OA_MT_Rules_Manage.Back}</td>
+</tr>
+</tbody>
+</table>
+
+<div style="clear: both;" class="hidden">{T_OA_MT_Rules_Manage.DeptId}</div>]]></FormHtml>
+				<FormHtml2><![CDATA[<p>申请单号:{T_OA_MT_Rules_Manage.ApplyNo}</p>
+<p>科室:{T_OA_MT_Rules_Manage.DeptName}</p>
+<p>姓名:{T_OA_MT_Rules_Manage.EmployeeName}</p>
+<p>工号:{T_OA_MT_Rules_Manage.EmployeeNo}</p>
+<p>联系电话:{T_OA_MT_Rules_Manage.Cellphone}</p>
+<p>上传附件:{T_OA_MT_Rules_Manage.Accessories}</p>
+<p>备注:{T_OA_MT_Rules_Manage.Remark}{T_OA_MT_Rules_Manage.Back}</p>
+<p>下一个处理人:{T_OA_MT_Rules_Manage.PathFlag}</p>
+<div class="hidden" style="clear: both;">{T_OA_MT_Rules_Manage.DeptId}</div>]]></FormHtml2>
+				<PrintHtml><![CDATA[]]>
+				</PrintHtml>
+				<DetailHtml><![CDATA[<style><!--
+#input011 {
+	BORDER-BOTTOM: gray solid; BORDER-LEFT: gray 0px solid; PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; WIDTH: 96px;  FLOAT: none; HEIGHT: 16px; COLOR: blue; BORDER-TOP: gray 0px solid; BORDER-RIGHT: gray 0px solid; PADDING-TOP: 0px
+}
+--></style>
+<div style="text-align: right;">申请单号:{T_OA_MT_Rules_Manage.ApplyNo}</div>
+<table align="center" class="normaltbl" border="1" sizcache="2" sizset="0"><caption class=" " style="background: #D6E8FC;">医疗规章制度申请单</caption>
+<tbody sizcache="2" sizset="0">
+<tr>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">科室</td>
+<td width="35%">{T_OA_MT_Rules_Manage.DeptName}</td>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">姓名</td>
+<td width="35%">{T_OA_MT_Rules_Manage.EmployeeName}</td>
+</tr>
+<tr>
+<td width="15%" style="text-align: center; background: #F6F8F9;">工号</td>
+<td width="35%">{T_OA_MT_Rules_Manage.EmployeeNo}</td>
+<td width="15%" style="text-align: center; background: #F6F8F9;">联系电话</td>
+<td width="35%">{T_OA_MT_Rules_Manage.Cellphone}</td>
+</tr>
+<tr>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">上传附件</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.Accessories}</td>
+</tr>
+<tr>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">委员会委员附件上传</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.CommitteeAccessories}</td>
+</tr>
+<tr>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">医务处附件上传</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.MedicalAccessories}</td>
+</tr>
+<tr>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">备注</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.Remark}{T_OA_MT_Rules_Manage.Back}</td>
+</tr>
+</tbody>
+</table>
+<table class="subtbl" border="1" align="center" id="T_OA_MT_Metting">
+<caption><span>&nbsp;上院务会</span></caption>
+<thead>
+<tr>
+<td style="width: 30px;" class="subtbltd">序号</td>
+<td class="subtbltd">说明</td>
+<td class="subtbltd">上传附件</td>
+<td class="ADDBTN subtbltd">[#ADD#]</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{ORDER}</td>
+<td>{EXPLAIN}</td>
+<td>{METTINGACCESSORIE}</td>
+<td class="DELBTN">[#DEL#]</td>
+</tr>
+</tbody>
+</table>
+<div class="hidden" style="clear: both;">{T_OA_MT_Rules_Manage.DeptId}{ORDER}{EXPLAIN}{METTINGACCESSORIE}</div>]]></DetailHtml>
+				<EditScriptBlock><![CDATA[]]>
+				</EditScriptBlock>
+				<ViewScript><![CDATA[]]>
+				</ViewScript>
+				<PrintScript><![CDATA[]]>
+				</PrintScript>
+				<MobileScript><![CDATA[]]>
+				</MobileScript>
+				<ListScriptBlock><![CDATA[]]>
+				</ListScriptBlock>
+			</TableStyle>
+			<TableStyle StyleIndex="2" StyleName="医务处"
+				TableName="T_OA_MT_Rules_Manage">
+				<FormHtml><![CDATA[<style><!--
+#input011 {
+	BORDER-BOTTOM: gray solid; BORDER-LEFT: gray 0px solid; PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; WIDTH: 96px;  FLOAT: none; HEIGHT: 16px; COLOR: blue; BORDER-TOP: gray 0px solid; BORDER-RIGHT: gray 0px solid; PADDING-TOP: 0px
+}
+--></style>
+<div style="text-align: right;">申请单号:{T_OA_MT_Rules_Manage.ApplyNo}</div>
+<table align="center" class="normaltbl" border="1" sizcache="2" sizset="0"><caption class=" " style="background: #D6E8FC;">医疗规章制度申请单</caption>
+<tbody sizcache="2" sizset="0">
+<tr>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">科室</td>
+<td width="35%">{T_OA_MT_Rules_Manage.DeptName}</td>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">姓名</td>
+<td width="35%">{T_OA_MT_Rules_Manage.EmployeeName}</td>
+</tr>
+<tr>
+<td width="15%" style="text-align: center; background: #F6F8F9;">工号</td>
+<td width="35%">{T_OA_MT_Rules_Manage.EmployeeNo}</td>
+<td width="15%" style="text-align: center; background: #F6F8F9;">联系电话</td>
+<td width="35%">{T_OA_MT_Rules_Manage.Cellphone}</td>
+</tr>
+<tr>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">上传附件</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.Accessories}</td>
+</tr>
+<tr>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">委员会委员附件上传</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.CommitteeAccessories}</td>
+</tr>
+<tr>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">医务处附件上传</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.MedicalAccessories}</td>
+</tr>
+<tr>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">备注</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.Remark}{T_OA_MT_Rules_Manage.Back}</td>
+</tr>
+</tbody>
+</table>
+<div class="hidden" style="clear: both;">{T_OA_MT_Rules_Manage.DeptId}</div>]]></FormHtml>
+				<FormHtml2><![CDATA[<p>申请单号:{T_OA_MT_Rules_Manage.ApplyNo}</p>
+<p>科室:{T_OA_MT_Rules_Manage.DeptName}</p>
+<p>姓名:{T_OA_MT_Rules_Manage.EmployeeName}</p>
+<p>工号:{T_OA_MT_Rules_Manage.EmployeeNo}</p>
+<p>联系电话:{T_OA_MT_Rules_Manage.Cellphone}</p>
+<p>上传附件:{T_OA_MT_Rules_Manage.Accessories}</p>
+<p>委员会委员附件上传:{T_OA_MT_Rules_Manage.CommitteeAccessories}</p>
+<p>医务处附件上传:{T_OA_MT_Rules_Manage.MedicalAccessories}</p>
+<p>备注:{T_OA_MT_Rules_Manage.Remark}{T_OA_MT_Rules_Manage.Back}</p>
+<div class="hidden" style="clear: both;">{T_OA_MT_Rules_Manage.DeptId}</div>]]></FormHtml2>
+				<PrintHtml><![CDATA[]]>
+				</PrintHtml>
+				<DetailHtml><![CDATA[<style><!--
+#input011 {
+	BORDER-BOTTOM: gray solid; BORDER-LEFT: gray 0px solid; PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; WIDTH: 96px;  FLOAT: none; HEIGHT: 16px; COLOR: blue; BORDER-TOP: gray 0px solid; BORDER-RIGHT: gray 0px solid; PADDING-TOP: 0px
+}
+--></style>
+<div style="text-align: right;">申请单号:{T_OA_MT_Rules_Manage.ApplyNo}</div>
+<table align="center" class="normaltbl" border="1" sizcache="2" sizset="0"><caption class=" " style="background: #D6E8FC;">医疗规章制度申请单</caption>
+<tbody sizcache="2" sizset="0">
+<tr>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">科室</td>
+<td width="35%">{T_OA_MT_Rules_Manage.DeptName}</td>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">姓名</td>
+<td width="35%">{T_OA_MT_Rules_Manage.EmployeeName}</td>
+</tr>
+<tr>
+<td width="15%" style="text-align: center; background: #F6F8F9;">工号</td>
+<td width="35%">{T_OA_MT_Rules_Manage.EmployeeNo}</td>
+<td width="15%" style="text-align: center; background: #F6F8F9;">联系电话</td>
+<td width="35%">{T_OA_MT_Rules_Manage.Cellphone}</td>
+</tr>
+<tr>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">上传附件</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.Accessories}</td>
+</tr>
+<tr>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">委员会委员附件上传</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.CommitteeAccessories}</td>
+</tr>
+<tr>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">医务处附件上传</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.MedicalAccessories}</td>
+</tr>
+<tr>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">备注</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.Remark}{T_OA_MT_Rules_Manage.Back}</td>
+</tr>
+<tr>
+</tbody>
+</table>
+<table class="subtbl" border="1" align="center" id="T_OA_MT_Metting">
+<caption><span>&nbsp;上院务会</span></caption>
+<thead>
+<tr>
+<td style="width: 30px;" class="subtbltd">序号</td>
+<td class="subtbltd">说明</td>
+<td class="subtbltd">上传附件</td>
+<td class="ADDBTN subtbltd">[#ADD#]</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{ORDER}</td>
+<td>{EXPLAIN}</td>
+<td>{METTINGACCESSORIE}</td>
+<td class="DELBTN">[#DEL#]</td>
+</tr>
+</tbody>
+</table>
+<div class="hidden" style="clear: both;">{T_OA_MT_Rules_Manage.DeptId}{ORDER}{EXPLAIN}{METTINGACCESSORIE}</div>]]></DetailHtml>
+				<EditScriptBlock><![CDATA[]]>
+				</EditScriptBlock>
+				<ViewScript><![CDATA[]]>
+				</ViewScript>
+				<PrintScript><![CDATA[]]>
+				</PrintScript>
+				<MobileScript><![CDATA[]]>
+				</MobileScript>
+				<ListScriptBlock><![CDATA[]]>
+				</ListScriptBlock>
+			</TableStyle>
+			<TableStyle StyleIndex="3" StyleName="院务会"
+				TableName="T_OA_MT_Rules_Manage">
+				<FormHtml><![CDATA[<style><!--
+#input011 {
+	BORDER-BOTTOM: gray solid; BORDER-LEFT: gray 0px solid; PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; WIDTH: 96px;  FLOAT: none; HEIGHT: 16px; COLOR: blue; BORDER-TOP: gray 0px solid; BORDER-RIGHT: gray 0px solid; PADDING-TOP: 0px
+}
+--></style>
+<div style="text-align: right;">申请单号:{T_OA_MT_Rules_Manage.ApplyNo}</div>
+<table align="center" class="normaltbl" border="1" sizcache="2" sizset="0"><caption class=" " style="background: #D6E8FC;">医疗规章制度申请单</caption>
+<tbody sizcache="2" sizset="0">
+<tr>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">科室</td>
+<td width="35%">{T_OA_MT_Rules_Manage.DeptName}</td>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">姓名</td>
+<td width="35%">{T_OA_MT_Rules_Manage.EmployeeName}</td>
+</tr>
+<tr>
+<td width="15%" style="text-align: center; background: #F6F8F9;">工号</td>
+<td width="35%">{T_OA_MT_Rules_Manage.EmployeeNo}</td>
+<td width="15%" style="text-align: center; background: #F6F8F9;">联系电话</td>
+<td width="35%">{T_OA_MT_Rules_Manage.Cellphone}</td>
+</tr>
+<tr>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">上传附件</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.Accessories}</td>
+</tr>
+<tr>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">委员会委员附件上传</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.CommitteeAccessories}</td>
+</tr>
+<tr>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">医务处附件上传</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.MedicalAccessories}</td>
+</tr>
+<tr>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">备注</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.Remark}{T_OA_MT_Rules_Manage.Back}</td>
+</tr>
+</tbody>
+</table>
+<table class="subtbl" border="1" align="center" id="T_OA_MT_Metting">
+<caption><span>&nbsp;上院务会</span></caption>
+<thead>
+<tr>
+<td style="width: 30px;" class="subtbltd">序号</td>
+<td class="subtbltd">说明</td>
+<td class="subtbltd">上传附件</td>
+<td class="ADDBTN subtbltd">[#ADD#]</td>
+</tr>
+  </thead>
+  <tbody>
+<tr>
+<td>{ORDER}</td>
+<td>{EXPLAIN}</td>
+<td>{METTINGACCESSORIE}</td>
+<td class="DELBTN">[#DEL#]</td>
+</tr>
+</tbody>
+</table>
+<div class="hidden" style="clear: both;">{T_OA_MT_Rules_Manage.DeptId}{ORDER}{EXPLAIN}{METTINGACCESSORIE}</div>]]></FormHtml>
+				<FormHtml2><![CDATA[<p>申请单号:{T_OA_MT_Rules_Manage.ApplyNo}</p>
+<p>科室:{T_OA_MT_Rules_Manage.DeptName}</p>
+<p>姓名:{T_OA_MT_Rules_Manage.EmployeeName}</p>
+<p>工号:{T_OA_MT_Rules_Manage.EmployeeNo}</p>
+<p>联系电话:{T_OA_MT_Rules_Manage.Cellphone}</p>
+<p>上传附件:{T_OA_MT_Rules_Manage.Accessories}</p>
+<p>委员会委员附件上传:{T_OA_MT_Rules_Manage.CommitteeAccessories}</p>
+<p>医务处附件上传:{T_OA_MT_Rules_Manage.MedicalAccessories}</p>
+<p>备注:{T_OA_MT_Rules_Manage.Remark}{T_OA_MT_Rules_Manage.Back}</p>
+<div class="hidden" style="clear: both;">{T_OA_MT_Rules_Manage.DeptId}</div>
+<table class="subtbl" border="1" align="center" id="T_OA_MT_Metting"  style="width:700px;border-collapse:collapse"> <caption style="height: 30px; line-height: 30px; text-align: left; background: #D6E4F2; border-left: #808080 1px solid; border-right: #808080 1px solid;" class=" "><span>&nbsp;上院务会</span></caption>
+<thead>
+<tr>
+<td style="width: 30px;" class="subtbltd">序号</td>
+<td class="subtbltd">说明</td>
+<td class="subtbltd">上传附件</td>
+</tr>
+  </thead>
+  <tbody>
+<tr>
+<td>{ORDER}</td>
+<td>{EXPLAIN}</td>
+<td>{METTINGACCESSORIE}</td>
+</tr>
+</tbody>
+</table>
+<div class="hidden" style="clear: both;">{T_OA_MT_Rules_Manage.DeptId}{ORDER}{EXPLAIN}{METTINGACCESSORIE}</div>]]></FormHtml2>
+				<PrintHtml><![CDATA[]]>
+				</PrintHtml>
+				<DetailHtml><![CDATA[<style><!--
+#input011 {
+	BORDER-BOTTOM: gray solid; BORDER-LEFT: gray 0px solid; PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; WIDTH: 96px;  FLOAT: none; HEIGHT: 16px; COLOR: blue; BORDER-TOP: gray 0px solid; BORDER-RIGHT: gray 0px solid; PADDING-TOP: 0px
+}
+--></style>
+<div style="text-align: right;">申请单号:{T_OA_MT_Rules_Manage.ApplyNo}</div>
+<table align="center" class="normaltbl" border="1" sizcache="2" sizset="0"><caption class=" " style="background: #D6E8FC;">医疗规章制度申请单</caption>
+<tbody sizcache="2" sizset="0">
+<tr>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">科室</td>
+<td width="35%">{T_OA_MT_Rules_Manage.DeptName}</td>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">姓名</td>
+<td width="35%">{T_OA_MT_Rules_Manage.EmployeeName}</td>
+</tr>
+<tr>
+<td width="15%" style="text-align: center; background: #F6F8F9;">工号</td>
+<td width="35%">{T_OA_MT_Rules_Manage.EmployeeNo}</td>
+<td width="15%" style="text-align: center; background: #F6F8F9;">联系电话</td>
+<td width="35%">{T_OA_MT_Rules_Manage.Cellphone}</td>
+</tr>
+<tr>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">上传附件</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.Accessories}</td>
+</tr>
+<tr>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">委员会委员附件上传</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.CommitteeAccessories}</td>
+</tr>
+<tr>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">医务处附件上传</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.MedicalAccessories}</td>
+</tr>
+<tr>
+<td width="15%" height="25" style="text-align: center; background: #F6F8F9;">备注</td>
+<td width="35%" colspan="3">{T_OA_MT_Rules_Manage.Remark}{T_OA_MT_Rules_Manage.Back}</td>
+</tr>
+<tr>
+</tbody>
+</table>
+<table class="subtbl" border="1" align="center" id="T_OA_MT_Metting">
+<caption><span>&nbsp;上院务会</span></caption>
+<thead>
+<tr>
+<td style="width: 30px;" class="subtbltd">序号</td>
+<td class="subtbltd">说明</td>
+<td class="subtbltd">上传附件</td>
+<td class="ADDBTN subtbltd">[#ADD#]</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{ORDER}</td>
+<td>{EXPLAIN}</td>
+<td>{METTINGACCESSORIE}</td>
+<td class="DELBTN">[#DEL#]</td>
+</tr>
+</tbody>
+</table>
+<div class="hidden" style="clear: both;">{T_OA_MT_Rules_Manage.DeptId}{ORDER}{EXPLAIN}{METTINGACCESSORIE}</div>]]></DetailHtml>
+				<EditScriptBlock><![CDATA[]]>
+				</EditScriptBlock>
+				<ViewScript><![CDATA[]]>
+				</ViewScript>
+				<PrintScript><![CDATA[]]>
+				</PrintScript>
+				<MobileScript><![CDATA[]]>
+				</MobileScript>
+				<ListScriptBlock><![CDATA[]]>
+				</ListScriptBlock>
+			</TableStyle>
+		</TableStyles>
+		<TableScripts>
+			<TableScript TableName="T_OA_MT_Rules_Manage" ScriptCode="select_cellphone"
+				Enable="是" ScriptEvent="_">
+				<ScriptTxt><![CDATA[SELECT Cellphone FROM [dbo].[T_E_Org_Employee] where EmployeeCode='@empcode']]></ScriptTxt>
+				<ScriptNote><![CDATA[]]>
+				</ScriptNote>
+			</TableScript>
+			<TableScript TableName="T_OA_MT_Rules_Manage" ScriptCode="select_applyNo"
+				Enable="是" ScriptEvent="_">
+				<ScriptTxt><![CDATA[select dbo.get_ylgz_auto_num('@cglx','@num')]]></ScriptTxt>
+				<ScriptNote><![CDATA[]]>
+				</ScriptNote>
+			</TableScript>
+		</TableScripts>
+		<bizModel _AutoID="896a371a-5d59-48cc-af08-37bef45e5a4a"
+			TableName="T_OA_MT_Metting" TableNameCn="上院务会" ParentName="T_OA_MT_Rules_Manage"
+			TableCat="" TableType="2" DataLog="0" ConnectionId="" EditMode="0"
+			InitRows="1">
+			<EditScriptBlock><![CDATA[]]>
+			</EditScriptBlock>
+			<FormHtml><![CDATA[<style><!--
+#input011 {
+	BORDER-BOTTOM: gray solid; BORDER-LEFT: gray 0px solid; PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; WIDTH: 96px;  FLOAT: none; HEIGHT: 16px; COLOR: blue; BORDER-TOP: gray 0px solid; BORDER-RIGHT: gray 0px solid; PADDING-TOP: 0px
+}
+--></style>
+<table class="normaltbl" border="1" align="center" sizset="0" sizcache="2">
+<tbody sizset="0" sizcache="2">
+<tr>
+<td style="text-align: center; background: #F6F8F9;" height="25" width="15%">序号</td>
+<td style="text-align: center; background: #F6F8F9;" height="25" width="15%">说明</td>
+<td style="text-align: center; background: #F6F8F9;" height="25" width="15%">上传附件</td>
+</tr>
+<tr>
+<td width="35%">{T_OA_MT_Metting.ORDER}</td>  
+<td width="35%">{T_OA_MT_Metting.EXPLAIN}</td>
+<td width="35%">{T_OA_MT_Metting.METTINGACCESSORIE}</td>
+</tr>
+</tbody>
+</table>
+<div style="clear: both;" class="hidden">{T_OA_MT_Rules_Manage.DeptId}</div>]]></FormHtml>
+			<FormHtml2><![CDATA[]]>
+			</FormHtml2>
+			<PrintHtml><![CDATA[]]>
+			</PrintHtml>
+			<DetailHtml><![CDATA[]]>
+			</DetailHtml>
+			<Fields>
+				<Field _AutoID="d924d1b2-fedd-41ea-bcb7-4a4fefdba06f"
+					TableName="T_OA_MT_Metting" FieldName="ORDER" FieldNameCn="序号"
+					FieldOdr="1" FieldType="2" FieldLength="" FieldInDisp="1"
+					FieldRead="0" FieldNull="0" FieldWidth="" FieldHeight=""
+					FieldDValueType="" FieldDValue="" FieldInDispStyle="003"
+					FieldInDispStyleTxt="" FieldInDispStyleName="子表序号" FieldInFilter=""
+					IsComput="0" IsUnique="0" ListDisp="1" QueryDisp="0" ColumnAlign=""
+					ColumnWidth="80" ColumnOrder="1" ColumnHidden="0" QueryOrder="0"
+					ColumnRender="" ColFormatExp="" ColTotalExp="" QueryMatchMode=""
+					QueryDefaultType="" QueryDefaultValue="" QueryStyle=""
+					QueryStyleName="" QueryStyleTxt="" />
+				<Field _AutoID="18778814-a4d5-4a97-8e91-d041674711fd"
+					TableName="T_OA_MT_Metting" FieldName="EXPLAIN" FieldNameCn="说明"
+					FieldOdr="2" FieldType="1" FieldLength="50" FieldInDisp="1"
+					FieldRead="0" FieldNull="0" FieldWidth="" FieldHeight=""
+					FieldDValueType="" FieldDValue="" FieldInDispStyle=""
+					FieldInDispStyleTxt="" FieldInDispStyleName="" FieldInFilter=""
+					IsComput="0" IsUnique="0" ListDisp="1" QueryDisp="0" ColumnAlign=""
+					ColumnWidth="80" ColumnOrder="2" ColumnHidden="0" QueryOrder="0"
+					ColumnRender="" ColFormatExp="" ColTotalExp="" QueryMatchMode=""
+					QueryDefaultType="" QueryDefaultValue="" QueryStyle=""
+					QueryStyleName="" QueryStyleTxt="" />
+				<Field _AutoID="40d8b724-31d8-4720-bd19-e055de72e22c"
+					TableName="T_OA_MT_Metting" FieldName="METTINGACCESSORIE"
+					FieldNameCn="上传附件" FieldOdr="3" FieldType="1" FieldLength="50"
+					FieldInDisp="1" FieldRead="0" FieldNull="0" FieldWidth=""
+					FieldHeight="" FieldDValueType="" FieldDValue="" FieldInDispStyle="023"
+					FieldInDispStyleTxt="||1|0|1" FieldInDispStyleName="多附件上传"
+					FieldInFilter="" IsComput="0" IsUnique="0" ListDisp="1" QueryDisp="0"
+					ColumnAlign="" ColumnWidth="80" ColumnOrder="3" ColumnHidden="0"
+					QueryOrder="0" ColumnRender="" ColFormatExp="" ColTotalExp=""
+					QueryMatchMode="" QueryDefaultType="" QueryDefaultValue=""
+					QueryStyle="" QueryStyleName="" QueryStyleTxt="" />
+			</Fields>
+			<FieldEvents />
+			<TableStyles />
+		</bizModel>
+	</bizModel>
+</root>

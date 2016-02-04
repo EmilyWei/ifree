@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<business name="OA_QINGJIA" cnName="请假表" tableName="OA_QINGJIA">
+<sqlList><![CDATA[
+			select * from (select *,dbo.WF_GetActiveNodeByAppId(_AutoId) ActiveNode,dbo.WF_GetActiveEmployeeByAppId(_AutoID) ActiveEmployee
+ from OA_QINGJIA) t where |^condition^| |^sortdir^|
+		]]></sqlList>
+<sqlEdit><![CDATA[
+			select * from OA_QINGJIA where |^condition^| 
+		]]></sqlEdit>
+<attributes>
+<attribute name="EMPLOYNAME" cnName="姓名" type="1" length="40" order="1"/>
+<attribute name="EMPLOYN0" cnName="工号" type="1" length="40" order="2"/>
+<attribute name="DEPTID" cnName="科室id" type="1" length="50" order="3"/>
+<attribute name="DEPTNAME" cnName="科室名称" type="1" length="128" order="4"/>
+<attribute name="STARTDATE" cnName="开始时间" type="4" length="" order="5"/>
+<attribute name="ENDDATE" cnName="结束时间" type="4" length="" order="6"/>
+<attribute name="QJTYPE" cnName="请假类型" type="1" length="40" order="7"/>
+<attribute name="USERDESC" cnName="情况说明" type="1" length="300" order="8"/>
+<attribute name="APDESC" cnName="外出地点" type="1" length="100" order="9"/>
+<attribute name="TASKID" cnName="taskid" type="1" length="40" order="10"/>
+<attribute name="PROCESSID" cnName="流程id" type="1" length="40" order="11"/>
+<attribute name="HEADTYPE" cnName="类型" type="1" length="256" order="12"/>
+<attribute name="WCLOCATION" cnName="工作是否安排妥当" type="1" length="128" order="13"/>
+<attribute name="QHNO" cnName="申请单号" type="1" length="40" order="14"/>
+<attribute name="STATUS" cnName="状态" type="2" length="" order="15"/>
+<attribute name="CREATEDATE" cnName="创建时间" type="4" length="" order="16"/>
+<attribute name="WORKNAME" cnName="工作名称" type="1" length="50" order="17"/>
+<attribute name="DATESUM" cnName="请假总时间" type="3" length="12,1" order="18"/>
+<attribute name="YYEARDATE" cnName="寒暑假总天数" type="3" length="4,1" order="19"/>
+<attribute name="SYEARDATE" cnName="剩余寒暑假" type="1" length="50" order="20"/>
+<attribute name="DATELENGT" cnName="时长" type="1" length="100" order="21"/>
+<attribute name="TXJTYPE" cnName="调休类型" type="1" length="20" order="22"/>
+<attribute name="QINGJIASUM" cnName="请假总数" type="1" length="100" order="23"/>
+<attribute name="CALCULATESUM" cnName="请假时长" type="1" length="50" order="24"/>
+<attribute name="DO" cnName="操作" type="1" length="50" order="25"/>
+<attribute name="MARK" cnName="标识" type="1" length="50" order="26"/>
+<attribute name="DEPUTY" cnName="相关工作代理人" type="1" length="50" order="27"/>
+<attribute name="CHOOSEDZBPLANID" cnName="选中的值班计划id" type="1" length="1000" order="28"/>
+<attribute name="THISYEAR" cnName="当前年份" type="1" length="50" order="29"/>
+<attribute name="LASTYEAR" cnName="上一年份" type="1" length="50" order="30"/>
+<attribute name="YYEARDATELY" cnName="上一年寒暑假总天数" type="3" length="4,1" order="31"/>
+<attribute name="SYEARDATELY" cnName="上一年剩余寒暑假" type="1" length="50" order="32"/>
+<attribute name="NEXTYEAR" cnName="下一年份" type="1" length="50" order="33"/>
+<attribute name="YYEARDATENY" cnName="下一年寒暑假总天数" type="3" length="4,1" order="34"/>
+<attribute name="SYEARDATENY" cnName="下一年剩余寒暑假" type="1" length="50" order="35"/>
+<attribute name="ActiveNode" cnName="当前节点" type="1" length="" order="36"/>
+<attribute name="ActiveEmployee" cnName="审批人" type="1" length="" order="37"/>
+</attributes>
+<lists>
+<list>
+<listPropertyStyles>
+<listPropertyStyle name="QHNO"/>
+<listPropertyStyle name="ID"/>
+<listPropertyStyle name="EMPLOYNAME"/>
+<listPropertyStyle name="EMPLOYN0"/>
+<listPropertyStyle name="STARTDATE"/>
+<listPropertyStyle name="ENDDATE"/>
+<listPropertyStyle name="DEPTID"/>
+<listPropertyStyle name="DEPTNAME"/>
+<listPropertyStyle name="QJTYPE"/>
+<listPropertyStyle name="HEADTYPE"/>
+<listPropertyStyle name="USERDESC"/>
+<listPropertyStyle name="APDESC"/>
+<listPropertyStyle name="TASKID"/>
+<listPropertyStyle name="PROCESSID"/>
+<listPropertyStyle name="WCLOCATION"/>
+<listPropertyStyle name="STATUS"/>
+<listPropertyStyle name="CREATEDATE"/>
+<listPropertyStyle name="WORKNAME"/>
+<listPropertyStyle name="DATESUM"/>
+<listPropertyStyle name="YYEARDATE"/>
+<listPropertyStyle name="SYEARDATE"/>
+<listPropertyStyle name="CALCULATESUM"/>
+<listPropertyStyle name="TXJTYPE"/>
+<listPropertyStyle name="QINGJIASUM"/>
+</listPropertyStyles>
+</list>
+<list>
+<listPropertyStyles>
+<listPropertyStyle name="QHNO"/>
+<listPropertyStyle name="HEADTYPE"/>
+<listPropertyStyle name="EMPLOYNAME"/>
+<listPropertyStyle name="EMPLOYN0"/>
+<listPropertyStyle name="DEPTID"/>
+<listPropertyStyle name="_CreateTime"/>
+<listPropertyStyle name="DEPTNAME"/>
+<listPropertyStyle name="QJTYPE"/>
+<listPropertyStyle name="STARTDATE"/>
+<listPropertyStyle name="ENDDATE"/>
+<listPropertyStyle name="CALCULATESUM"/>
+<listPropertyStyle name="DO"/>
+<listPropertyStyle name="USERDESC"/>
+<listPropertyStyle name="APDESC"/>
+<listPropertyStyle name="_WFCurNode"/>
+<listPropertyStyle name="_WFCurUser"/>
+<listPropertyStyle name="TASKID"/>
+<listPropertyStyle name="PROCESSID"/>
+<listPropertyStyle name="WCLOCATION"/>
+<listPropertyStyle name="STATUS"/>
+<listPropertyStyle name="CREATEDATE"/>
+<listPropertyStyle name="WORKNAME"/>
+<listPropertyStyle name="DATESUM"/>
+<listPropertyStyle name="YYEARDATE"/>
+<listPropertyStyle name="SYEARDATE"/>
+<listPropertyStyle name="DATELENGT"/>
+<listPropertyStyle name="TXJTYPE"/>
+<listPropertyStyle name="QINGJIASUM"/>
+<listPropertyStyle name="_WFState"/>
+</listPropertyStyles>
+</list>
+<list>
+<listPropertyStyles>
+<listPropertyStyle name="EMPLOYNAME"/>
+<listPropertyStyle name="EMPLOYN0"/>
+<listPropertyStyle name="STARTDATE"/>
+<listPropertyStyle name="ENDDATE"/>
+<listPropertyStyle name="DEPTID"/>
+<listPropertyStyle name="DEPTNAME"/>
+<listPropertyStyle name="QJTYPE"/>
+<listPropertyStyle name="HEADTYPE"/>
+<listPropertyStyle name="CALCULATESUM"/>
+<listPropertyStyle name="DO"/>
+<listPropertyStyle name="USERDESC"/>
+<listPropertyStyle name="APDESC"/>
+<listPropertyStyle name="TASKID"/>
+<listPropertyStyle name="PROCESSID"/>
+<listPropertyStyle name="WCLOCATION"/>
+<listPropertyStyle name="QHNO"/>
+<listPropertyStyle name="STATUS"/>
+<listPropertyStyle name="CREATEDATE"/>
+<listPropertyStyle name="WORKNAME"/>
+<listPropertyStyle name="DATESUM"/>
+<listPropertyStyle name="YYEARDATE"/>
+<listPropertyStyle name="SYEARDATE"/>
+<listPropertyStyle name="DATELENGT"/>
+<listPropertyStyle name="TXJTYPE"/>
+<listPropertyStyle name="QINGJIASUM"/>
+</listPropertyStyles>
+</list>
+<list>
+<listPropertyStyles>
+<listPropertyStyle name="QHNO"/>
+<listPropertyStyle name="EMPLOYN0"/>
+<listPropertyStyle name="HEADTYPE"/>
+<listPropertyStyle name="EMPLOYNAME"/>
+<listPropertyStyle name="_CreateTime"/>
+<listPropertyStyle name="DEPTID"/>
+<listPropertyStyle name="DEPTNAME"/>
+<listPropertyStyle name="STARTDATE"/>
+<listPropertyStyle name="ENDDATE"/>
+<listPropertyStyle name="CALCULATESUM"/>
+<listPropertyStyle name="ActiveNode"/>
+<listPropertyStyle name="QJTYPE"/>
+<listPropertyStyle name="USERDESC"/>
+<listPropertyStyle name="ActiveEmployee"/>
+<listPropertyStyle name="DO"/>
+<listPropertyStyle name="_WFCurNode"/>
+<listPropertyStyle name="APDESC"/>
+<listPropertyStyle name="TASKID"/>
+<listPropertyStyle name="_WFCurUser"/>
+<listPropertyStyle name="PROCESSID"/>
+<listPropertyStyle name="WCLOCATION"/>
+<listPropertyStyle name="STATUS"/>
+<listPropertyStyle name="CREATEDATE"/>
+<listPropertyStyle name="WORKNAME"/>
+<listPropertyStyle name="DATESUM"/>
+<listPropertyStyle name="YYEARDATE"/>
+<listPropertyStyle name="SYEARDATE"/>
+<listPropertyStyle name="DATELENGT"/>
+<listPropertyStyle name="TXJTYPE"/>
+<listPropertyStyle name="QINGJIASUM"/>
+<listPropertyStyle name="_WFState"/>
+</listPropertyStyles>
+</list>
+<list>
+<listPropertyStyles>
+<listPropertyStyle name="QHNO"/>
+<listPropertyStyle name="HEADTYPE"/>
+<listPropertyStyle name="ActiveNode"/>
+<listPropertyStyle name="ActiveEmployee"/>
+<listPropertyStyle name="EMPLOYNAME"/>
+<listPropertyStyle name="EMPLOYN0"/>
+<listPropertyStyle name="DEPTID"/>
+<listPropertyStyle name="STARTDATE"/>
+<listPropertyStyle name="ENDDATE"/>
+<listPropertyStyle name="DEPTNAME"/>
+<listPropertyStyle name="QJTYPE"/>
+<listPropertyStyle name="CALCULATESUM"/>
+<listPropertyStyle name="DO"/>
+<listPropertyStyle name="CREATEDATE"/>
+<listPropertyStyle name="DEPUTY"/>
+<listPropertyStyle name="USERDESC"/>
+<listPropertyStyle name="APDESC"/>
+<listPropertyStyle name="THISYEAR"/>
+<listPropertyStyle name="CHOOSEDZBPLANID"/>
+<listPropertyStyle name="LASTYEAR"/>
+<listPropertyStyle name="TASKID"/>
+<listPropertyStyle name="PROCESSID"/>
+<listPropertyStyle name="YYEARDATELY"/>
+<listPropertyStyle name="SYEARDATELY"/>
+<listPropertyStyle name="NEXTYEAR"/>
+<listPropertyStyle name="WCLOCATION"/>
+<listPropertyStyle name="YYEARDATENY"/>
+<listPropertyStyle name="SYEARDATENY"/>
+<listPropertyStyle name="STATUS"/>
+<listPropertyStyle name="WORKNAME"/>
+<listPropertyStyle name="DATESUM"/>
+<listPropertyStyle name="YYEARDATE"/>
+<listPropertyStyle name="SYEARDATE"/>
+<listPropertyStyle name="DATELENGT"/>
+<listPropertyStyle name="TXJTYPE"/>
+<listPropertyStyle name="QINGJIASUM"/>
+<listPropertyStyle name="MARK"/>
+</listPropertyStyles>
+</list>
+</lists>
+<forms>
+<form>
+<editLayout><![CDATA[
+			<style><!--
+    #maindiv
+    {
+        width: 900px;
+    }
+    #input014
+    {
+        border: 0px solid gray;
+        border-bottom: 1px solid black;
+        color: blue;
+        width: 96px;
+        float: none;
+        padding: 0px 0px 2px 0px;
+        height: 16px;
+    }
+--></style>
+<div style="text-align: right; line-height: 30px; height: 30px;">申请单号:${OA_QINGJIA.QHNO}</div>
+<table align="center" class="normaltbl" border="1"><caption class=" " style="background: #D6E8FC;"><span>因公外出登记表</span></caption>
+<tbody>
+<tr>
+<td width="15%" class="normaltbltd">申请人</td>
+<td width="35%">${OA_QINGJIA.EMPLOYNAME}</td>
+<td width="15%" class="normaltbltd">申请工号</td>
+<td width="35%">${OA_QINGJIA.EMPLOYN0}</td>
+</tr>
+<tr>
+<td width="15%" class="normaltbltd">科室</td>
+<td width="35%" colspan="3">${OA_QINGJIA.DEPTNAME}</td>
+</tr>
+<tr>
+<td class="normaltbltd">外出时间</td>
+<td>${OA_QINGJIA.STARTDATE}至 ${OA_QINGJIA.ENDDATE}${OA_QINGJIA.CALCULATESUM}</td>
+<td class="normaltbltd">外出地点</td>
+<td>${OA_QINGJIA.APDESC}</td>
+</tr>
+<tr>
+<td class="normaltbltd">显示寒暑假</td>
+<td>应有寒暑假:${OA_QINGJIA.YYEARDATE}<br />剩余寒暑假:${OA_QINGJIA.SYEARDATE}</td>
+<td class="normaltbltd">外出期间工作安排是否妥当</td>
+<td>${OA_QINGJIA.WCLOCATION}</td>
+</tr>
+<tr></tr>
+<tr>
+<td class="normaltbltd">外出事由</td>
+<td colspan="3">${OA_QINGJIA.QJTYPE}</td>
+</tr>
+<tr>
+<td class="normaltbltd">情况说明</td>
+<td colspan="5">${OA_QINGJIA.USERDESC}</td>
+</tr>
+</tbody>
+</table>
+<div class="hidden" style="clear: both;">${OA_QINGJIA.HEADTYPE}${OA_QINGJIA.EMPLOYN0}${OA_QINGJIA.DEPTID}${OA_QINGJIA.MARK}</div>
+		]]></editLayout>
+<formPropertyEvents/>
+<formPropertyStyles>
+<formPropertyStyle name="MARK" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="ID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="USERNAME" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="USERNO" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="DEPTID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="DEPTNAME" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="STARTDATE" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="ENDDATE" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="QJTYPE" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="USERDESC" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="APDESC" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="TASKID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="PROCESSID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="HEADTYPE" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="WCLOCATION" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="QHNO" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="STATUS" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="CREATEDATE" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="WORKNAME" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="DATESUM" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="YYEARDATE" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="SYEARDATE" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="DATELENGT" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="TXJTYPE" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="QINGJIASUM" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="CALCULATESUM" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="HOSPITAL_TYPE" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="EMPLOYNAME" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="EMPLOYN0" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="DO" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="DEPUTY" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="CHOOSEDZBPLANID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="THISYEAR" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="LASTYEAR" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="YYEARDATELY" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="SYEARDATELY" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="NEXTYEAR" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="YYEARDATENY" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="SYEARDATENY" visiable="1" editable="1" required="0"/>
+</formPropertyStyles>
+<formPropertyStyles>
+<formPropertyStyle name="MARK" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="DEPUTY" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="STARTDATE" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="EMPLOYNAME" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="EMPLOYN0" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="DEPTID" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="DEPTNAME" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="ENDDATE" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="QJTYPE" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="USERDESC" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="APDESC" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="TASKID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="PROCESSID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="HEADTYPE" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="WCLOCATION" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="QHNO" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="STATUS" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="CREATEDATE" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="WORKNAME" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="DATESUM" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="YYEARDATE" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="SYEARDATE" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="DATELENGT" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="TXJTYPE" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="QINGJIASUM" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="CALCULATESUM" visiable="1" editable="1" required="1"/>
+<formPropertyStyle name="DO" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="CHOOSEDZBPLANID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="THISYEAR" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="LASTYEAR" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="NEXTYEAR" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="YYEARDATENY" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="SYEARDATENY" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="YYEARDATELY" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="SYEARDATELY" visiable="1" editable="1" required="0"/>
+</formPropertyStyles>
+<formPropertyStyles>
+<formPropertyStyle name="MARK" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="EMPLOYNAME" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="EMPLOYN0" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="DEPTID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="DEPTNAME" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="STARTDATE" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="ENDDATE" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="QJTYPE" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="USERDESC" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="APDESC" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="TASKID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="PROCESSID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="HEADTYPE" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="WCLOCATION" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="QHNO" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="STATUS" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="CREATEDATE" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="WORKNAME" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="DATESUM" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="YYEARDATE" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="SYEARDATE" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="DATELENGT" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="TXJTYPE" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="QINGJIASUM" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="CALCULATESUM" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="DO" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="DEPUTY" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="CHOOSEDZBPLANID" visiable="1" editable="0" required="0"/>
+</formPropertyStyles>
+<formPropertyStyles>
+<formPropertyStyle name="DEPUTY" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="MARK" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="EMPLOYNAME" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="EMPLOYN0" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="DEPTID" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="DEPTNAME" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="STARTDATE" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="ENDDATE" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="QJTYPE" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="USERDESC" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="APDESC" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="TASKID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="PROCESSID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="HEADTYPE" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="WCLOCATION" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="QHNO" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="STATUS" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="CREATEDATE" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="WORKNAME" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="DATESUM" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="YYEARDATE" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="SYEARDATE" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="DATELENGT" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="TXJTYPE" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="QINGJIASUM" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="CALCULATESUM" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="DO" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="CHOOSEDZBPLANID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="THISYEAR" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="LASTYEAR" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="YYEARDATELY" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="SYEARDATELY" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="NEXTYEAR" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="YYEARDATENY" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="SYEARDATENY" visiable="1" editable="1" required="0"/>
+</formPropertyStyles>
+<formPropertyStyles>
+<formPropertyStyle name="EMPLOYNAME" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="EMPLOYN0" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="DEPTID" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="DEPTNAME" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="STARTDATE" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="ENDDATE" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="QJTYPE" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="USERDESC" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="APDESC" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="TASKID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="PROCESSID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="HEADTYPE" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="WCLOCATION" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="QHNO" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="STATUS" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="CREATEDATE" visiable="1" editable="1" required="1"/>
+<formPropertyStyle name="WORKNAME" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="DATESUM" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="YYEARDATE" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="SYEARDATE" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="DATELENGT" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="TXJTYPE" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="QINGJIASUM" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="CALCULATESUM" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="DO" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="MARK" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="DEPUTY" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="CHOOSEDZBPLANID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="THISYEAR" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="LASTYEAR" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="YYEARDATELY" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="SYEARDATELY" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="NEXTYEAR" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="YYEARDATENY" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="SYEARDATENY" visiable="1" editable="1" required="0"/>
+</formPropertyStyles>
+</form>
+</forms>
+<businesses/>
+</business>

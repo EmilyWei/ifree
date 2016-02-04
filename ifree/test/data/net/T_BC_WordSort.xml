@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<bizModel _AutoID="0ddc878c-c44f-43c5-950a-ceac743c5632"
+		TableName="T_BC_WordSort" TableNameCn="工种主表" ParentName="" TableCat="00010006"
+		TableType="1" DataLog="0" ConnectionId="" DataLogTmpl="" DeleteMode="0"
+		ShowState="0" ArchiveState="0" OrderField="OrderID asc" FormWidth=""
+		EditMode="" InitRows="0">
+		<ListSQL><![CDATA[select * from T_BC_WordSort where |^condition^| |^sortdir^|]]></ListSQL>
+		<DetailSQL><![CDATA[select * from T_BC_WordSort where |^condition^|]]></DetailSQL>
+		<ListScriptBlock><![CDATA[
+
+function IsActive(fld,row)
+{
+     var str1="是";
+     if(fld==0) str1="否";
+     return(str1);
+}]]></ListScriptBlock>
+		<ListPreProcessFn><![CDATA[]]>
+		</ListPreProcessFn>
+		<EditScriptBlock><![CDATA[]]>
+		</EditScriptBlock>
+		<FormHtml><![CDATA[<table class="normaltbl" border="1"><caption>工种主表</caption>
+<tbody>
+<tr>
+<td width="20%">工种名称</td>
+<td width="30%">{T_BC_WordSort.WordSortName}</td>
+<td width="20%">工种编码</td>
+<td>{T_BC_WordSort.WordSortCode}</td>
+</tr>
+<tr>
+<td>是否启用</td>
+<td>{T_BC_WordSort.active}</td>
+<td>工种上级编码</td>
+<td>{T_BC_WordSort.WordSortPCode}</td>
+</tr>
+<tr>
+<td>排序编号</td>
+<td>{T_BC_WordSort.OrderID}</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p style="line-height: 5px; height: 4px; clear: both; font-size: 4px;">&nbsp;</p>
+<table id="T_BC_WordSort_sub1" class="subtbl" border="1">
+<thead>
+<tr>
+<td colspan="2">单位描述</td>
+<td colspan="2">单位名称</td>
+<td>是否启用</td>
+<td class="ADDBTN">[#ADDBTN#]</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2">{Remarks}</td>
+<td colspan="2">{unitName}{unitID}</td>
+<td>{active}</td>
+<td class="DELBTN">[#DELBTN#]</td>
+</tr>
+</tbody>
+</table>]]></FormHtml>
+		<FormHtml2><![CDATA[]]>
+		</FormHtml2>
+		<PrintHtml><![CDATA[]]>
+		</PrintHtml>
+		<DetailHtml><![CDATA[]]>
+		</DetailHtml>
+		<Fields>
+			<Field _AutoID="dee453c7-94ef-4c08-a106-8d2118464d91"
+				TableName="T_BC_WordSort" FieldName="WordSortName" FieldNameCn="工种名称"
+				FieldOdr="1" FieldType="1" FieldLength="200" FieldInDisp="1"
+				FieldRead="0" FieldNull="0" FieldWidth="" FieldHeight=""
+				FieldDValueType="" FieldDValue="" FieldInDispStyle=""
+				FieldInDispStyleTxt="" FieldInDispStyleName="" FieldInFilter=""
+				IsComput="0" IsUnique="0" ListDisp="1" QueryDisp="1" ColumnAlign=""
+				ColumnWidth="80" ColumnOrder="0" ColumnHidden="0" QueryOrder="0"
+				ColumnRender="" ColFormatExp="" ColTotalExp="" QueryMatchMode=""
+				QueryDefaultType="" QueryDefaultValue="" QueryStyle=""
+				QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="aeba97af-2ab9-4160-8a84-a334b04a3a19"
+				TableName="T_BC_WordSort" FieldName="WordSortCode" FieldNameCn="工种编码"
+				FieldOdr="2" FieldType="1" FieldLength="50" FieldInDisp="1"
+				FieldRead="0" FieldNull="0" FieldWidth="" FieldHeight=""
+				FieldDValueType="" FieldDValue="" FieldInDispStyle=""
+				FieldInDispStyleTxt="" FieldInDispStyleName="" FieldInFilter=""
+				IsComput="0" IsUnique="0" ListDisp="1" QueryDisp="1" ColumnAlign=""
+				ColumnWidth="80" ColumnOrder="1" ColumnHidden="0" QueryOrder="1"
+				ColumnRender="" ColFormatExp="" ColTotalExp="" QueryMatchMode=""
+				QueryDefaultType="" QueryDefaultValue="" QueryStyle=""
+				QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="14947cb2-73d3-4cd8-b805-d25811bb527b"
+				TableName="T_BC_WordSort" FieldName="active" FieldNameCn="是否启用"
+				FieldOdr="3" FieldType="2" FieldLength="" FieldInDisp="1" FieldRead="0"
+				FieldNull="0" FieldWidth="" FieldHeight="" FieldDValueType=""
+				FieldDValue=" 1" FieldInDispStyle="013" FieldInDispStyleTxt="是|1,否|0"
+				FieldInDispStyleName="自定义值下拉（用逗号隔开）" FieldInFilter="" IsComput="0"
+				IsUnique="0" ListDisp="1" QueryDisp="0" ColumnAlign="" ColumnWidth="80"
+				ColumnOrder="2" ColumnHidden="0" QueryOrder="0" ColumnRender="IsActive"
+				ColFormatExp="" ColTotalExp="" QueryMatchMode="" QueryDefaultType=""
+				QueryDefaultValue="" QueryStyle="" QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="d9bc3994-b72e-4e77-bdb6-e33f115efd66"
+				TableName="T_BC_WordSort" FieldName="WordSortPCode" FieldNameCn="工种上级编码"
+				FieldOdr="4" FieldType="1" FieldLength="50" FieldInDisp="1"
+				FieldRead="1" FieldNull="0" FieldWidth="" FieldHeight=""
+				FieldDValueType="" FieldDValue="" FieldInDispStyle=""
+				FieldInDispStyleTxt="" FieldInDispStyleName="" FieldInFilter=""
+				IsComput="0" IsUnique="0" ListDisp="0" QueryDisp="0" ColumnAlign=""
+				ColumnWidth="80" ColumnOrder="4" ColumnHidden="0" QueryOrder="0"
+				ColumnRender="" ColFormatExp="" ColTotalExp="" QueryMatchMode=""
+				QueryDefaultType="" QueryDefaultValue="" QueryStyle=""
+				QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="c60a03a8-7da3-444c-9695-5fc40cc0346b"
+				TableName="T_BC_WordSort" FieldName="OrderID" FieldNameCn="排序编号"
+				FieldOdr="5" FieldType="2" FieldLength="" FieldInDisp="1" FieldRead="0"
+				FieldNull="0" FieldWidth="" FieldHeight="" FieldDValueType=""
+				FieldDValue="" FieldInDispStyle="" FieldInDispStyleTxt=""
+				FieldInDispStyleName="" FieldInFilter="" IsComput="0" IsUnique="0"
+				ListDisp="0" QueryDisp="0" ColumnAlign="" ColumnWidth="80"
+				ColumnOrder="5" ColumnHidden="0" QueryOrder="0" ColumnRender=""
+				ColFormatExp="" ColTotalExp="" QueryMatchMode="" QueryDefaultType=""
+				QueryDefaultValue="" QueryStyle="" QueryStyleName="" QueryStyleTxt="" />
+		</Fields>
+		<FieldEvents />
+		<TableStyles />
+		<TableScripts />
+		<bizModel _AutoID="1b1a1428-e40d-41e0-865b-b587871e09aa"
+			TableName="T_BC_WordSort_sub1" TableNameCn="工种子表" ParentName="T_BC_WordSort"
+			TableCat="" TableType="2" DataLog="0" ConnectionId="" EditMode="1"
+			InitRows="0">
+			<EditScriptBlock><![CDATA[]]>
+			</EditScriptBlock>
+			<FormHtml><![CDATA[]]>
+			</FormHtml>
+			<FormHtml2><![CDATA[]]>
+			</FormHtml2>
+			<PrintHtml><![CDATA[]]>
+			</PrintHtml>
+			<DetailHtml><![CDATA[]]>
+			</DetailHtml>
+			<Fields>
+				<Field _AutoID="7044d4ae-b241-4b0a-894d-cc86d88e555e"
+					TableName="T_BC_WordSort_sub1" FieldName="unitName" FieldNameCn="单位名称"
+					FieldOdr="1" FieldType="1" FieldLength="200" FieldInDisp="1"
+					FieldRead="1" FieldNull="1" FieldWidth="" FieldHeight=""
+					FieldDValueType="" FieldDValue="" FieldInDispStyle="036"
+					FieldInDispStyleTxt="|unitName,unitID|deptname,deptid"
+					FieldInDispStyleName="弹出组织机构-单选" FieldInFilter="" IsComput="0"
+					IsUnique="0" ListDisp="0" QueryDisp="0" ColumnAlign="" ColumnWidth="80"
+					ColumnOrder="1" ColumnHidden="0" QueryOrder="0" ColumnRender=""
+					ColFormatExp="" ColTotalExp="" QueryMatchMode="" QueryDefaultType=""
+					QueryDefaultValue="" QueryStyle="" QueryStyleName="" QueryStyleTxt="" />
+				<Field _AutoID="f2850a3e-c2a4-4098-bdca-a3e6b50b0653"
+					TableName="T_BC_WordSort_sub1" FieldName="active" FieldNameCn="是否启用"
+					FieldOdr="3" FieldType="2" FieldLength="" FieldInDisp="1"
+					FieldRead="0" FieldNull="0" FieldWidth="" FieldHeight=""
+					FieldDValueType="" FieldDValue="1" FieldInDispStyle="013"
+					FieldInDispStyleTxt="是|1,否|0" FieldInDispStyleName="自定义值下拉（用逗号隔开）"
+					FieldInFilter="" IsComput="0" IsUnique="0" ListDisp="0" QueryDisp="0"
+					ColumnAlign="" ColumnWidth="80" ColumnOrder="3" ColumnHidden="0"
+					QueryOrder="0" ColumnRender="" ColFormatExp="" ColTotalExp=""
+					QueryMatchMode="" QueryDefaultType="" QueryDefaultValue=""
+					QueryStyle="" QueryStyleName="" QueryStyleTxt="" />
+				<Field _AutoID="df4ac30e-6ddf-4ee0-8eb3-744505182378"
+					TableName="T_BC_WordSort_sub1" FieldName="Remarks" FieldNameCn="单位描述"
+					FieldOdr="5" FieldType="1" FieldLength="50" FieldInDisp="1"
+					FieldRead="0" FieldNull="0" FieldWidth="" FieldHeight=""
+					FieldDValueType="" FieldDValue="" FieldInDispStyle=""
+					FieldInDispStyleTxt="" FieldInDispStyleName="" FieldInFilter=""
+					IsComput="0" IsUnique="0" ListDisp="0" QueryDisp="0" ColumnAlign=""
+					ColumnWidth="80" ColumnOrder="5" ColumnHidden="0" QueryOrder="0"
+					ColumnRender="" ColFormatExp="" ColTotalExp="" QueryMatchMode=""
+					QueryDefaultType="" QueryDefaultValue="" QueryStyle=""
+					QueryStyleName="" QueryStyleTxt="" />
+				<Field _AutoID="2c904616-46d3-4c3e-b23d-46a0fe5e8179"
+					TableName="T_BC_WordSort_sub1" FieldName="unitID" FieldNameCn="单位ID"
+					FieldOdr="6" FieldType="1" FieldLength="50" FieldInDisp="0"
+					FieldRead="0" FieldNull="0" FieldWidth="" FieldHeight=""
+					FieldDValueType="" FieldDValue="" FieldInDispStyle=""
+					FieldInDispStyleTxt="" FieldInDispStyleName="" FieldInFilter=""
+					IsComput="0" IsUnique="0" ListDisp="0" QueryDisp="0" ColumnAlign=""
+					ColumnWidth="80" ColumnOrder="6" ColumnHidden="0" QueryOrder="0"
+					ColumnRender="" ColFormatExp="" ColTotalExp="" QueryMatchMode=""
+					QueryDefaultType="" QueryDefaultValue="" QueryStyle=""
+					QueryStyleName="" QueryStyleTxt="" />
+			</Fields>
+			<FieldEvents />
+			<TableStyles />
+		</bizModel>
+	</bizModel>
+</root>

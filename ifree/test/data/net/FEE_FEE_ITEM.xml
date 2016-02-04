@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<bizModel _AutoID="00cce7d3-0d75-481e-b6c7-174b6ef19138"
+		TableName="FEE_FEE_ITEM" TableNameCn="科研药品费用项" ParentName="" TableCat="00010017"
+		TableType="1" DataLog="0" ConnectionId="" DataLogTmpl="" DeleteMode="0"
+		ShowState="0" ArchiveState="0" OrderField="" FormWidth="" EditMode=""
+		InitRows="0">
+		<ListSQL><![CDATA[select * from FEE_FEE_ITEM where |^condition^| |^sortdir^|]]></ListSQL>
+		<DetailSQL><![CDATA[select * from FEE_FEE_ITEM where |^condition^|]]></DetailSQL>
+		<ListScriptBlock><![CDATA[function fnSel(v,row)
+{
+   var autoid=$(row).attr("id"); //主键
+   var state = $("STATUS", row).text();  //启用状态(1:作废,空和0:启用)
+   var str=new Array();
+   str.push("<a href=\"javascript:edit('"+autoid+"');\">编辑</a>");
+   if(state=="" || state=="0")
+      str.push("<a class='normal red' href=\"javascript:UpState('" +autoid+ "','1');\">禁用</a>");
+   else
+      str.push("<a class='normal green' href=\"javascript:UpState('" +autoid+ "','0');\">启用</a>");
+   return str.join("|");
+}
+//编辑数据
+function edit(id)
+{
+   openCenter("AppInput.aspx?tblName=FEE_FEE_ITEM&condition=_AutoID='"+id+"'","_blank",1000,700);
+}
+function UpState(id,state)
+{
+   var temp=state=="1"?"禁用":"启用"
+   if(!confirm("您确定选择【"+temp+"】吗？")) return;
+   var parameters=new Array();
+   parameters.push("@state="+state);
+   parameters.push("@id="+id);
+   var ret=_curClass.ExecSQL("update_item_state",parameters.join("|"));
+   if(ret.error)
+   {
+      alert("修改数据时出错！");
+   }   
+   else
+   {
+      $.noticeAdd({ text: temp+'成功！'});
+      $("#flex1").flexReload();
+   }
+}
+function fnItemState(v,row)
+{
+   if (!!v)
+   {
+       if(v=="1")
+          return "<span style='color:red;'>禁用</span>";
+       else
+          return "<span style='color:green;'>启用</span>";
+   }
+   else 
+   {
+       return "<span style='color:green;'>启用</span>";           
+   }
+}
+function fnDeptType(v,row)
+{
+   if (!!v)
+   {
+       if(v=="CL")
+          return "临床服务类";
+       else if(v=="AD")
+          return "行政管理类";
+       else
+          return "---";
+   }
+   else 
+   {
+       return "---";                
+   }
+}
+function fnItemType(v,row)
+{
+   if (!!v)
+   {
+       if(v=="0")
+          return "普通费用";
+       else if(v=="1")
+          return "科室基金";
+       else if(v=="2")
+          return "往来款";
+       else if(v=="3")
+          return "捐赠支出";
+       else if(v=="4")
+          return "教学";
+       else if(v=="5")
+          return "科研";
+       else if(v=="6")
+          return "科教项目";
+       else if(v=="7")
+          return "财政";
+       else
+          return "---";
+   }
+   else 
+   {
+       return "---";                
+   }
+}]]></ListScriptBlock>
+		<ListPreProcessFn><![CDATA[]]>
+		</ListPreProcessFn>
+		<EditScriptBlock><![CDATA[jQuery(function()
+{
+   $(".topnav,.wfheader").css("background","url(../../Img/rmyy/bk.png)");
+   var fundid=$("#input07").val();
+   var objectstr=_curClass.ExecSQL("select_subject_attr","@fundid="+fundid).value;
+   if(!!objectstr)
+   {
+      $("#tip").text(objectstr);
+   }
+   $("#input08").change(function(){ishavaitem(this);}).change();
+   $("#btnSubmit").hide();
+   $(".btn01").css({"background-color":"#d88326","font-weight":"bold"}).hover(function(){this.className="btn02";},function(){this.className="btn01";});
+   Item();
+});
+function ishavaitem(ctl)
+{
+   var val=$(ctl).val();
+   if(!!val)
+   {
+      if(val=="1")
+         _sys.getField("SUB_ITEM_ID").empty=1;  //必填
+      else
+         _sys.getField("SUB_ITEM_ID").empty=0;  //非必填
+   }
+   else
+   {
+      _sys.getField("SUB_ITEM_ID").empty=0;     //非必填
+   }
+}
+//预算科目
+function Item()
+{
+   if($("#input018").val()=="") $("#input018").val("<请双击选择>");
+   $("#input018").css("color","#606060").bind
+   ({  
+      focus:function(){if($(this).val()=="<请双击选择>"){$(this).val("")};}, 
+      blur:function(){if($(this).val()==""){$(this).val("<请双击选择>").css("color","#606060")};},
+      keyup:function(){$(this).css("color","black");},
+      dblclick:function()
+      {
+         var paramStr=new Array();
+         if($("#input017").val()!='')
+         {
+           var codes=$("#input017").val().split(",");
+           var names=$("#input018").val().split(",");
+           for(var i=0;i<codes.length;i++)
+           {
+              paramStr.push(codes[i]+"-"+names[i]);
+           }
+         }
+        //多选 
+        _openCenter("../../WorkAsp/select/Expense/Select_KMRadio.aspx?tblName=Q_Item_Budget&itemsStr="+paramStr.join(","),"",900,600);
+        // 单选 
+        //_openCenter("../../WorkAsp/select/Expense/Select_KMRadio(2).aspx?tblName=Q_Item_Budget&cid=input017,input018&queryfield=Code,Name","",900,600);
+      }
+   });
+}
+function select_proper_callback()
+{}
+
+function select_callback(arr)
+{
+   var codes=new Array();
+   var names=new Array();
+   for(var i=0;i<arr.length;i++)
+   {
+      var key=arr[i];
+      codes.push(key.split("@")[0]);
+      names.push(key.split("@")[1]);
+   }
+   $("#input017").val(codes.join(","));
+   $("#input018").val(names.join(","));
+}
+
+  $("#btnSave").unbind("click").click(function () 
+  {
+   var safe = false;
+   try {safe = _sysSave();} catch (err) {alert("提交过程中出现异常：" + err.message+"\r\n请尝试重新提交，或者联系管理员。");}
+   if(safe)
+     {
+       $.ajax({
+         type:"post",
+         url:"../../WorkAsp/Apply/BatchToDo.ashx?t=11",
+         data:{autoId:_mainId},
+         dataType:"text",
+         success:function(d)
+              {}     
+  		   });
+     }
+  });]]></EditScriptBlock>
+		<FormHtml><![CDATA[<style type="text/css">
+    #maindiv
+    {
+        width: 900px;
+    }
+</style>
+<table class="normaltbl" border="1" align="center">
+    <caption style="background: #D6E8FC;" class=" "><span>费用项</span></caption>
+    <tbody>
+        <tr>
+            <td width="15%" class="normaltbltd">会计科目</td>
+            <td width="35%">{FEE_FEE_ITEM.ITEM_CODE}</td>
+            <td width="15%" class="normaltbltd">费用项</td>
+            <td width="35%">{FEE_FEE_ITEM.ITEM_COMMENT}</td>
+        </tr>
+        <tr>
+            <td width="15%" class="normaltbltd">预算科目</td>
+            <td colspan='3'>{FEE_FEE_ITEM.BudgetItems}{FEE_FEE_ITEM.BudgetCodes}</td>
+        </tr>
+        <tr>
+            <td class="normaltbltd">费用类型</td>
+            <td>{FEE_FEE_ITEM.ITEM_TYPE}</td>
+            <td class="normaltbltd">科室类型</td>
+            <td>{FEE_FEE_ITEM.DEPT_TYPE_CODE}</td>
+        </tr>
+        <tr>
+            <td class="normaltbltd">明细名称</td>
+            <td colspan='3'>{FEE_FEE_ITEM.ACCT_COMMNET}</td>
+        </tr>
+        <tr>
+            <td class="normaltbltd">是否有子目</td>
+            <td colspan='3'>{FEE_FEE_ITEM.ISHAVAITEM}</td>
+        </tr>
+        <tr>
+            <td class="normaltbltd">子目</td>
+            <td colspan='3'>{FEE_FEE_ITEM.SUB_ITEM_ID}</td>
+        </tr>
+        <tr>
+            <td class="normaltbltd">基金来源</td>
+            <td colspan='3'><div id="tip"></div></td>
+        </tr>
+    </tbody>
+</table>
+<div class="hidden" style="clear: both;">{FEE_FEE_ITEM.FUND_ID}</div>]]></FormHtml>
+		<FormHtml2><![CDATA[]]>
+		</FormHtml2>
+		<PrintHtml><![CDATA[]]>
+		</PrintHtml>
+		<DetailHtml><![CDATA[]]>
+		</DetailHtml>
+		<Fields>
+			<Field _AutoID="5855e3e5-2671-4fc0-853e-459f5997ad51"
+				TableName="FEE_FEE_ITEM" FieldName="ACCT_CODE" FieldNameCn="账户编码"
+				FieldOdr="1" FieldType="1" FieldLength="64" FieldInDisp="1"
+				FieldRead="0" FieldNull="0" FieldWidth="" FieldHeight=""
+				FieldDValueType="0" FieldDValue="" FieldInDispStyle=""
+				FieldInDispStyleTxt="" FieldInDispStyleName="" FieldInFilter=""
+				IsComput="0" IsUnique="0" ListDisp="0" QueryDisp="0" ColumnAlign=""
+				ColumnWidth="80" ColumnOrder="1" ColumnHidden="0" QueryOrder="0"
+				ColumnRender="" ColFormatExp="" ColTotalExp="" QueryMatchMode=""
+				QueryDefaultType="" QueryDefaultValue="" QueryStyle=""
+				QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="2acab0ef-c6ec-4b18-b171-c604a6754de3"
+				TableName="FEE_FEE_ITEM" FieldName="ACCT_COMMNET" FieldNameCn="账户说明"
+				FieldOdr="2" FieldType="1" FieldLength="200" FieldInDisp="1"
+				FieldRead="0" FieldNull="1" FieldWidth="" FieldHeight=""
+				FieldDValueType="0" FieldDValue="" FieldInDispStyle=""
+				FieldInDispStyleTxt="" FieldInDispStyleName="" FieldInFilter=""
+				IsComput="0" IsUnique="0" ListDisp="0" QueryDisp="0" ColumnAlign=""
+				ColumnWidth="80" ColumnOrder="2" ColumnHidden="0" QueryOrder="0"
+				ColumnRender="" ColFormatExp="" ColTotalExp="" QueryMatchMode=""
+				QueryDefaultType="" QueryDefaultValue="" QueryStyle=""
+				QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="1c217195-bc92-4bb9-ab84-a158f21fbf13"
+				TableName="FEE_FEE_ITEM" FieldName="ACCT_SUB" FieldNameCn="科目"
+				FieldOdr="3" FieldType="1" FieldLength="64" FieldInDisp="1"
+				FieldRead="0" FieldNull="0" FieldWidth="" FieldHeight=""
+				FieldDValueType="0" FieldDValue="" FieldInDispStyle=""
+				FieldInDispStyleTxt="" FieldInDispStyleName="" FieldInFilter=""
+				IsComput="0" IsUnique="0" ListDisp="0" QueryDisp="0" ColumnAlign=""
+				ColumnWidth="80" ColumnOrder="3" ColumnHidden="0" QueryOrder="0"
+				ColumnRender="" ColFormatExp="" ColTotalExp="" QueryMatchMode=""
+				QueryDefaultType="" QueryDefaultValue="" QueryStyle=""
+				QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="410bc1cf-e900-49ed-9c6d-c6f77394d95d"
+				TableName="FEE_FEE_ITEM" FieldName="DEPT_ID" FieldNameCn="科室ID"
+				FieldOdr="4" FieldType="1" FieldLength="64" FieldInDisp="1"
+				FieldRead="0" FieldNull="0" FieldWidth="" FieldHeight=""
+				FieldDValueType="0" FieldDValue="" FieldInDispStyle=""
+				FieldInDispStyleTxt="" FieldInDispStyleName="" FieldInFilter=""
+				IsComput="0" IsUnique="0" ListDisp="0" QueryDisp="0" ColumnAlign=""
+				ColumnWidth="80" ColumnOrder="4" ColumnHidden="0" QueryOrder="0"
+				ColumnRender="" ColFormatExp="" ColTotalExp="" QueryMatchMode=""
+				QueryDefaultType="" QueryDefaultValue="" QueryStyle=""
+				QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="a5a26070-82d3-4563-88dd-f511b1795d48"
+				TableName="FEE_FEE_ITEM" FieldName="DEPT_TYPE_CODE" FieldNameCn="科室类型"
+				FieldOdr="5" FieldType="1" FieldLength="64" FieldInDisp="1"
+				FieldRead="0" FieldNull="0" FieldWidth="" FieldHeight=""
+				FieldDValueType="0" FieldDValue="" FieldInDispStyle="013"
+				FieldInDispStyleTxt="临床服务类|CL,行政管理类|AD" FieldInDispStyleName="自定义值下拉"
+				FieldInFilter="" IsComput="0" IsUnique="0" ListDisp="1" QueryDisp="1"
+				ColumnAlign="2" ColumnWidth="80" ColumnOrder="3" ColumnHidden="0"
+				QueryOrder="3" ColumnRender="fnDeptType" ColFormatExp=""
+				ColTotalExp="" QueryMatchMode="" QueryDefaultType=""
+				QueryDefaultValue="" QueryStyle="013" QueryStyleName="自定义值下拉"
+				QueryStyleTxt="临床服务类|CL,行政管理类|AD" />
+			<Field _AutoID="f094ec02-5ced-4214-a871-ecc3abf45c57"
+				TableName="FEE_FEE_ITEM" FieldName="DEPT_TYPE_ID" FieldNameCn="科室类型ID"
+				FieldOdr="6" FieldType="1" FieldLength="64" FieldInDisp="1"
+				FieldRead="0" FieldNull="0" FieldWidth="" FieldHeight=""
+				FieldDValueType="0" FieldDValue="" FieldInDispStyle=""
+				FieldInDispStyleTxt="" FieldInDispStyleName="" FieldInFilter=""
+				IsComput="0" IsUnique="0" ListDisp="0" QueryDisp="0" ColumnAlign=""
+				ColumnWidth="80" ColumnOrder="6" ColumnHidden="0" QueryOrder="0"
+				ColumnRender="" ColFormatExp="" ColTotalExp="" QueryMatchMode=""
+				QueryDefaultType="" QueryDefaultValue="" QueryStyle=""
+				QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="a317d73b-fa69-4448-bf74-20d496d3dc96"
+				TableName="FEE_FEE_ITEM" FieldName="FUND_ID" FieldNameCn="基金来源ID"
+				FieldOdr="7" FieldType="1" FieldLength="64" FieldInDisp="1"
+				FieldRead="0" FieldNull="0" FieldWidth="" FieldHeight=""
+				FieldDValueType="0" FieldDValue="" FieldInDispStyle=""
+				FieldInDispStyleTxt="" FieldInDispStyleName="" FieldInFilter=""
+				IsComput="0" IsUnique="0" ListDisp="0" QueryDisp="0" ColumnAlign=""
+				ColumnWidth="80" ColumnOrder="7" ColumnHidden="0" QueryOrder="0"
+				ColumnRender="" ColFormatExp="" ColTotalExp="" QueryMatchMode=""
+				QueryDefaultType="" QueryDefaultValue="" QueryStyle=""
+				QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="5f64f7a3-d715-47f6-8656-d1f4fcc74f9f"
+				TableName="FEE_FEE_ITEM" FieldName="ISHAVAITEM" FieldNameCn="是否选择项目"
+				FieldOdr="8" FieldType="1" FieldLength="22" FieldInDisp="1"
+				FieldRead="0" FieldNull="1" FieldWidth="" FieldHeight=""
+				FieldDValueType="0" FieldDValue="" FieldInDispStyle="013"
+				FieldInDispStyleTxt="有|1,无|0" FieldInDispStyleName="自定义值下拉"
+				FieldInFilter="" IsComput="0" IsUnique="0" ListDisp="0" QueryDisp="0"
+				ColumnAlign="" ColumnWidth="80" ColumnOrder="8" ColumnHidden="0"
+				QueryOrder="0" ColumnRender="" ColFormatExp="" ColTotalExp=""
+				QueryMatchMode="" QueryDefaultType="" QueryDefaultValue=""
+				QueryStyle="" QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="02c03b61-800f-402e-a86a-7c0b52b34929"
+				TableName="FEE_FEE_ITEM" FieldName="ITEM_CODE" FieldNameCn="会计科目"
+				FieldOdr="9" FieldType="1" FieldLength="64" FieldInDisp="1"
+				FieldRead="0" FieldNull="1" FieldWidth="" FieldHeight=""
+				FieldDValueType="0" FieldDValue="" FieldInDispStyle=""
+				FieldInDispStyleTxt="" FieldInDispStyleName="" FieldInFilter=""
+				IsComput="0" IsUnique="0" ListDisp="1" QueryDisp="1" ColumnAlign="2"
+				ColumnWidth="91" ColumnOrder="0" ColumnHidden="0" QueryOrder="0"
+				ColumnRender="" ColFormatExp="" ColTotalExp="" QueryMatchMode=""
+				QueryDefaultType="" QueryDefaultValue="" QueryStyle=""
+				QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="1a93171e-49ea-4bba-b614-73aca46d1c8c"
+				TableName="FEE_FEE_ITEM" FieldName="ITEM_COMMENT" FieldNameCn="费用项"
+				FieldOdr="10" FieldType="1" FieldLength="200" FieldInDisp="1"
+				FieldRead="0" FieldNull="1" FieldWidth="" FieldHeight=""
+				FieldDValueType="0" FieldDValue="" FieldInDispStyle=""
+				FieldInDispStyleTxt="" FieldInDispStyleName="" FieldInFilter=""
+				IsComput="0" IsUnique="0" ListDisp="1" QueryDisp="1" ColumnAlign="2"
+				ColumnWidth="296" ColumnOrder="1" ColumnHidden="0" QueryOrder="1"
+				ColumnRender="" ColFormatExp="" ColTotalExp="" QueryMatchMode=""
+				QueryDefaultType="" QueryDefaultValue="" QueryStyle=""
+				QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="d018234d-6ad2-4558-b38b-d32f68351585"
+				TableName="FEE_FEE_ITEM" FieldName="ITEM_ID" FieldNameCn="主键"
+				FieldOdr="11" FieldType="1" FieldLength="64" FieldInDisp="1"
+				FieldRead="0" FieldNull="0" FieldWidth="" FieldHeight=""
+				FieldDValueType="0" FieldDValue="" FieldInDispStyle=""
+				FieldInDispStyleTxt="" FieldInDispStyleName="" FieldInFilter=""
+				IsComput="0" IsUnique="0" ListDisp="0" QueryDisp="0" ColumnAlign=""
+				ColumnWidth="80" ColumnOrder="11" ColumnHidden="0" QueryOrder="0"
+				ColumnRender="" ColFormatExp="" ColTotalExp="" QueryMatchMode=""
+				QueryDefaultType="" QueryDefaultValue="" QueryStyle=""
+				QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="fa247a76-73a5-4b07-9e17-dbda506d6a60"
+				TableName="FEE_FEE_ITEM" FieldName="ITEM_TYPE" FieldNameCn="费用类型"
+				FieldOdr="12" FieldType="1" FieldLength="64" FieldInDisp="1"
+				FieldRead="0" FieldNull="1" FieldWidth="" FieldHeight=""
+				FieldDValueType="0" FieldDValue="" FieldInDispStyle="013"
+				FieldInDispStyleTxt="普通费用|0,科室基金|1,往来款|2,捐赠支出|3,教学|4,科研|5,科教项目|6,财政|7"
+				FieldInDispStyleName="自定义值下拉" FieldInFilter="" IsComput="0"
+				IsUnique="0" ListDisp="1" QueryDisp="1" ColumnAlign="2" ColumnWidth="85"
+				ColumnOrder="2" ColumnHidden="0" QueryOrder="2" ColumnRender="fnItemType"
+				ColFormatExp="" ColTotalExp="" QueryMatchMode="" QueryDefaultType=""
+				QueryDefaultValue="" QueryStyle="" QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="12ff9379-55e2-4b10-ad11-e651b3fae6b6"
+				TableName="FEE_FEE_ITEM" FieldName="ORDER_ID" FieldNameCn="排序"
+				FieldOdr="13" FieldType="2" FieldLength="" FieldInDisp="1"
+				FieldRead="0" FieldNull="0" FieldWidth="" FieldHeight=""
+				FieldDValueType="0" FieldDValue="" FieldInDispStyle=""
+				FieldInDispStyleTxt="" FieldInDispStyleName="" FieldInFilter=""
+				IsComput="0" IsUnique="0" ListDisp="0" QueryDisp="0" ColumnAlign=""
+				ColumnWidth="80" ColumnOrder="13" ColumnHidden="0" QueryOrder="0"
+				ColumnRender="" ColFormatExp="" ColTotalExp="" QueryMatchMode=""
+				QueryDefaultType="" QueryDefaultValue="" QueryStyle=""
+				QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="d12bc70a-d0af-4f3d-ac94-2eacc9a12332"
+				TableName="FEE_FEE_ITEM" FieldName="STATUS" FieldNameCn="状态"
+				FieldOdr="14" FieldType="1" FieldLength="22" FieldInDisp="1"
+				FieldRead="0" FieldNull="0" FieldWidth="" FieldHeight=""
+				FieldDValueType="0" FieldDValue="" FieldInDispStyle=""
+				FieldInDispStyleTxt="" FieldInDispStyleName="" FieldInFilter=""
+				IsComput="0" IsUnique="0" ListDisp="1" QueryDisp="0" ColumnAlign=""
+				ColumnWidth="80" ColumnOrder="14" ColumnHidden="0" QueryOrder="0"
+				ColumnRender="fnItemState" ColFormatExp="" ColTotalExp=""
+				QueryMatchMode="" QueryDefaultType="" QueryDefaultValue=""
+				QueryStyle="" QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="a5742f91-0897-4917-9534-a23a0db40baf"
+				TableName="FEE_FEE_ITEM" FieldName="SUB_ITEM_ID" FieldNameCn="子项目编码"
+				FieldOdr="15" FieldType="1" FieldLength="64" FieldInDisp="1"
+				FieldRead="0" FieldNull="0" FieldWidth="" FieldHeight=""
+				FieldDValueType="0" FieldDValue="" FieldInDispStyle=""
+				FieldInDispStyleTxt="" FieldInDispStyleName="" FieldInFilter=""
+				IsComput="0" IsUnique="0" ListDisp="0" QueryDisp="0" ColumnAlign=""
+				ColumnWidth="80" ColumnOrder="15" ColumnHidden="0" QueryOrder="0"
+				ColumnRender="" ColFormatExp="" ColTotalExp="" QueryMatchMode=""
+				QueryDefaultType="" QueryDefaultValue="" QueryStyle=""
+				QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="9ce56831-00e7-46f0-8d1b-7e83be1e50ed"
+				TableName="FEE_FEE_ITEM" FieldName="CZ" FieldNameCn="操作" FieldOdr="16"
+				FieldType="1" FieldLength="50" FieldInDisp="1" FieldRead="0"
+				FieldNull="0" FieldWidth="" FieldHeight="" FieldDValueType=""
+				FieldDValue="" FieldInDispStyle="" FieldInDispStyleTxt=""
+				FieldInDispStyleName="" FieldInFilter="" IsComput="0" IsUnique="0"
+				ListDisp="1" QueryDisp="0" ColumnAlign="2" ColumnWidth="80"
+				ColumnOrder="16" ColumnHidden="0" QueryOrder="0" ColumnRender="fnSel"
+				ColFormatExp="" ColTotalExp="" QueryMatchMode="" QueryDefaultType=""
+				QueryDefaultValue="" QueryStyle="" QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="838992f5-3ef4-4ff9-aebe-a8ab0b50dcb4"
+				TableName="FEE_FEE_ITEM" FieldName="BudgetCodes" FieldNameCn="预算科目Code"
+				FieldOdr="17" FieldType="1" FieldLength="100" FieldInDisp="0"
+				FieldRead="0" FieldNull="0" FieldWidth="" FieldHeight=""
+				FieldDValueType="" FieldDValue="" FieldInDispStyle=""
+				FieldInDispStyleTxt="" FieldInDispStyleName="" FieldInFilter=""
+				IsComput="0" IsUnique="0" ListDisp="0" QueryDisp="0" ColumnAlign="1"
+				ColumnWidth="80" ColumnOrder="17" ColumnHidden="0" QueryOrder="0"
+				ColumnRender="" ColFormatExp="" ColTotalExp="" QueryMatchMode=""
+				QueryDefaultType="" QueryDefaultValue="" QueryStyle=""
+				QueryStyleName="" QueryStyleTxt="" />
+			<Field _AutoID="49100fc5-2227-4357-8547-081cf17d365b"
+				TableName="FEE_FEE_ITEM" FieldName="BudgetItems" FieldNameCn="预算科目"
+				FieldOdr="18" FieldType="1" FieldLength="500" FieldInDisp="1"
+				FieldRead="0" FieldNull="0" FieldWidth="" FieldHeight=""
+				FieldDValueType="" FieldDValue="" FieldInDispStyle=""
+				FieldInDispStyleTxt="" FieldInDispStyleName="" FieldInFilter=""
+				IsComput="0" IsUnique="0" ListDisp="1" QueryDisp="0" ColumnAlign="1"
+				ColumnWidth="80" ColumnOrder="18" ColumnHidden="0" QueryOrder="0"
+				ColumnRender="" ColFormatExp="" ColTotalExp="" QueryMatchMode=""
+				QueryDefaultType="" QueryDefaultValue="" QueryStyle=""
+				QueryStyleName="" QueryStyleTxt="" />
+		</Fields>
+		<FieldEvents />
+		<TableStyles />
+		<TableScripts>
+			<TableScript TableName="FEE_FEE_ITEM" ScriptCode="select_subject_attr"
+				Enable="是" ScriptEvent="_">
+				<ScriptTxt><![CDATA[select top 1 ATTRIBUTE1 from RRP_SUBJECT where FUNDID='@fundid']]></ScriptTxt>
+				<ScriptNote><![CDATA[根据基金来源ID查询课题来源]]></ScriptNote>
+			</TableScript>
+			<TableScript TableName="FEE_FEE_ITEM" ScriptCode="update_item_state"
+				Enable="是" ScriptEvent="_">
+				<ScriptTxt><![CDATA[update FEE_FEE_ITEM set status='@state' where _AutoID='@id']]></ScriptTxt>
+				<ScriptNote><![CDATA[修改启用状态]]></ScriptNote>
+			</TableScript>
+		</TableScripts>
+	</bizModel>
+</root>

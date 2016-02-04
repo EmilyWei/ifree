@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<display-name>ifree</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<!-- spring hibernate等配置 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:/applicationContext.xml</param-value>
+	</context-param>
+	
+	<!-- encodeing -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter>
+		<filter-name>encodingConvertFilter</filter-name>
+		<filter-class>com.mittop.ifree.filter.EncodingConvertFilter</filter-class>
+		<init-param>
+			<param-name>fromEncoding</param-name>
+			<param-value>ISO-8859-1</param-value>
+		</init-param>
+		<init-param>
+			<param-name>toEncoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	
+	<!-- openSessionInView配置 -->
+	<filter>
+		<filter-name>openSessionInViewFilter</filter-name>
+		<filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
+		<init-param>
+			<param-name>singleSession</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<!--spring mvc 配置 -->
+	<servlet>
+		<servlet-name>springmvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:/applicationContext-mvc.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup><!-- 是启动顺序，让这个Servlet随Servletp容器一起启动。 -->
+	</servlet>
+	
+	
+
+	<servlet-mapping>
+		<servlet-name>springmvc</servlet-name>
+		<url-pattern>*.do</url-pattern><!-- 会拦截.do的请求。 -->
+	</servlet-mapping>
+	
+	<!-- encoding filter for jsp page -->
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<!--  <url-pattern>/*.do</url-pattern>-->
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>encodingConvertFilter</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+
+
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+	
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>classpath:/log4j.properties</param-value>
+	</context-param>
+	<context-param>
+		<param-name>log4jExposeWebAppRoot</param-name>
+		<param-value>false</param-value>
+	</context-param>
+
+</web-app>

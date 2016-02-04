@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<business name="T_FEE_EXPENSE_INVOICE" cnName="日常报销" tableName="T_FEE_EXPENSE_INVOICE">
+<sqlList><![CDATA[select * from (select fe.*,b._AutoID InstanceId from T_FEE_EXPENSE_INVOICE fe  left join 
+dbo.T_E_WF_Instance b on fe._AutoID=b.AppID) t where |^condition^| |^sortdir^|
+]]></sqlList>
+<sqlEdit><![CDATA[select * from T_FEE_EXPENSE_INVOICE where |^condition^|]]></sqlEdit>
+<attributes>
+<attribute name="APP_DATE" cnName="申请日期" type="4" length="" order="1"/>
+<attribute name="APP_NO" cnName="申请单号" type="1" length="50" order="3"/>
+<attribute name="APP_TYPE" cnName="申请类型" type="1" length="50" order="4"/>
+<attribute name="ATTA_NUM" cnName="附件数量" type="1" length="50" order="5"/>
+<attribute name="CONTRACT_ID" cnName="合同单据号" type="1" length="50" order="6"/>
+<attribute name="CONTRACT_NAME" cnName="合同名称" type="1" length="50" order="7"/>
+<attribute name="DEBIT_TYPE" cnName="借方类型" type="1" length="50" order="8"/>
+<attribute name="DEPT_ID" cnName="申请科室编码" type="1" length="50" order="9"/>
+<attribute name="EBS_STATUS" cnName="EBS状态" type="1" length="50" order="10"/>
+<attribute name="EMP_ID" cnName="工号" type="1" length="50" order="11"/>
+<attribute name="EMP_NAME" cnName="申请人" type="1" length="50" order="12"/>
+<attribute name="FEE_TYPE" cnName="费用类型" type="1" length="50" order="13"/>
+<attribute name="MONEY" cnName="金额" type="3" length="10,2" order="17"/>
+<attribute name="PAY_ACCT_NO" cnName="支票/汇票号" type="1" length="50" order="19"/>
+<attribute name="PAY_DATE" cnName="付款时间" type="1" length="50" order="20"/>
+<attribute name="PAY_METHOD" cnName="支付方式" type="1" length="50" order="21"/>
+<attribute name="PAY_MONEY" cnName="实际付款金额" type="1" length="50" order="22"/>
+<attribute name="PAY_OBJECT" cnName="支付对象" type="1" length="50" order="24"/>
+<attribute name="REASON" cnName="报销事由" type="1" length="4000" order="25"/>
+<attribute name="REMARK" cnName="备注" type="1" length="4000" order="26"/>
+<attribute name="STATUS" cnName="状态" type="1" length="50" order="27"/>
+<attribute name="TAX_MONEY" cnName="个税" type="1" length="50" order="29"/>
+<attribute name="TOPIC_ID" cnName="课题号" type="1" length="50" order="30"/>
+<attribute name="do" cnName="操作" type="1" length="50" order="32"/>
+<attribute name="Dept_Name" cnName="申请科室" type="1" length="50" order="33"/>
+<attribute name="Home_Dept_Name" cnName="所属科室" type="1" length="50" order="34"/>
+<attribute name="Money_Capital" cnName="报销金额(大写)" type="1" length="50" order="35"/>
+<attribute name="TOPIC_NAME" cnName="科研课题" type="1" length="500" order="38"/>
+<attribute name="EBS_NUMBER" cnName="EBS号" type="1" length="50" order="39"/>
+<attribute name="JJ_SOURSE" cnName="基金来源" type="1" length="500" order="40"/>
+<attribute name="ERP_NUMBER" cnName="原ERP号" type="1" length="50" order="41"/>
+<attribute name="SOURSE_NUMBER" cnName="经费本号" type="1" length="50" order="42"/>
+<attribute name="_WFCurNode" cnName="当前步骤" type="1" length="" order="43"/>
+<attribute name="do" cnName="操作" type="1" length="" order="44"/>
+<attribute name="ACCOUNT_DATE" cnName="记账日期" type="4" length="" order="45"/>
+<attribute name="FUND_ID" cnName="基金来源ID" type="1" length="50" order="46"/>
+<attribute name="Hospital_Type" cnName="院区标识" type="1" length="50" order="47"/>
+<attribute name="_WFState" cnName="流程状态" type="1" length="" order="48"/>
+<attribute name="OPER_TYPE" cnName="RRP操作标识" type="1" length="50" order="49"/>
+<attribute name="TJ" cnName="RRP扣减标识" type="1" length="50" order="50"/>
+<attribute name="CONTRACT_AUTOID" cnName="合同单据ID" type="1" length="50" order="51"/>
+<attribute name="ReturnAmount" cnName="退换金额" type="3" length="10,2" order="52"/>
+<attribute name="PayMoney" cnName="支付金额" type="3" length="10,2" order="53"/>
+<attribute name="DebtCode" cnName="借款单号" type="1" length="50" order="54"/>
+<attribute name="DebtCause" cnName="借款事由" type="1" length="50" order="55"/>
+<attribute name="DebtMoney" cnName="借款金额" type="1" length="50" order="56"/>
+<attribute name="DebtType" cnName="借款方式" type="1" length="50" order="57"/>
+<attribute name="CONTRACT_APPLICATION_SN" cnName="合同单据号" type="1" length="" order="1"/>
+<attribute name="CONTRACT_NO" cnName="合同编号" type="1" length="" order="2"/>
+<attribute name="CONTRACT_FEE_TYPE" cnName="合同类型" type="1" length="" order="3"/>
+<attribute name="DATA_VALUE" cnName="合同大类" type="1" length="" order="4"/>
+<attribute name="CONTRACT_UPDATE_DATE" cnName="更新时间" type="4" length="" order="5"/>
+<attribute name="CONTRACT_APPLICATION_DATE" cnName="创建时间" type="1" length="" order="6"/>
+<attribute name="APPLICATION_NAME" cnName="经办人" type="1" length="" order="7"/>
+<attribute name="CONTRACT_NAME" cnName="合同名称" type="1" length="" order="8"/>
+<attribute name="ID" cnName="主键" type="1" length="" order="9"/>
+<attribute name="APP_NO" cnName="申请单号" type="1" length="" order="1"/>
+<attribute name="PAY_METHOD" cnName="支付方式" type="1" length="" order="2"/>
+<attribute name="REASON" cnName="借款事由" type="1" length="" order="3"/>
+<attribute name="MONEY" cnName="金额" type="3" length="" order="4"/>
+<attribute name="EMP_ID" cnName="工号" type="1" length="" order="5"/>
+</attributes>
+<lists>
+<list>
+<listPropertyStyles>
+<listPropertyStyle name="APP_NO"/>
+<listPropertyStyle name="APP_DATE"/>
+<listPropertyStyle name="APP_TYPE"/>
+<listPropertyStyle name="EMP_NAME"/>
+<listPropertyStyle name="EMP_ID"/>
+<listPropertyStyle name="PAY_METHOD"/>
+<listPropertyStyle name="MONEY"/>
+<listPropertyStyle name="ATTA_NUM"/>
+<listPropertyStyle name="STATUS"/>
+<listPropertyStyle name="CONTRACT_ID"/>
+<listPropertyStyle name="CONTRACT_NAME"/>
+<listPropertyStyle name="REASON"/>
+<listPropertyStyle name="_WFCurNode"/>
+<listPropertyStyle name="DEBIT_TYPE"/>
+<listPropertyStyle name="DEPT_ID"/>
+<listPropertyStyle name="do"/>
+<listPropertyStyle name="EBS_STATUS"/>
+<listPropertyStyle name="FEE_TYPE"/>
+<listPropertyStyle name="PAY_ACCT_NO"/>
+<listPropertyStyle name="PAY_DATE"/>
+<listPropertyStyle name="PAY_MONEY"/>
+<listPropertyStyle name="PAY_OBJECT"/>
+<listPropertyStyle name="REMARK"/>
+<listPropertyStyle name="TAX_MONEY"/>
+<listPropertyStyle name="_WFState"/>
+<listPropertyStyle name="TOPIC_ID"/>
+<listPropertyStyle name="Dept_Name"/>
+<listPropertyStyle name="Home_Dept_Name"/>
+<listPropertyStyle name="Money_Capital"/>
+</listPropertyStyles>
+</list>
+<list>
+<listPropertyStyles>
+<listPropertyStyle name="APP_NO"/>
+<listPropertyStyle name="APP_DATE"/>
+<listPropertyStyle name="APP_TYPE"/>
+<listPropertyStyle name="EMP_NAME"/>
+<listPropertyStyle name="EMP_ID"/>
+<listPropertyStyle name="MONEY"/>
+<listPropertyStyle name="STATUS"/>
+<listPropertyStyle name="ATTA_NUM"/>
+<listPropertyStyle name="CONTRACT_ID"/>
+<listPropertyStyle name="PAY_METHOD"/>
+<listPropertyStyle name="REASON"/>
+<listPropertyStyle name="CONTRACT_NAME"/>
+<listPropertyStyle name="DEBIT_TYPE"/>
+<listPropertyStyle name="_WFCurNode"/>
+<listPropertyStyle name="do"/>
+<listPropertyStyle name="DEPT_ID"/>
+<listPropertyStyle name="EBS_STATUS"/>
+<listPropertyStyle name="FEE_TYPE"/>
+<listPropertyStyle name="PAY_ACCT_NO"/>
+<listPropertyStyle name="PAY_DATE"/>
+<listPropertyStyle name="PAY_MONEY"/>
+<listPropertyStyle name="PAY_OBJECT"/>
+<listPropertyStyle name="REMARK"/>
+<listPropertyStyle name="TAX_MONEY"/>
+<listPropertyStyle name="TOPIC_ID"/>
+<listPropertyStyle name="EBS_NUMBER"/>
+<listPropertyStyle name="ERP_NUMBER"/>
+<listPropertyStyle name="SOURSE_NUMBER"/>
+<listPropertyStyle name="Dept_Name"/>
+<listPropertyStyle name="Home_Dept_Name"/>
+<listPropertyStyle name="Money_Capital"/>
+<listPropertyStyle name="_WFState"/>
+</listPropertyStyles>
+</list>
+</lists>
+<forms>
+<form>
+<editLayout><![CDATA[<p>
+    <script src="../../js/json2.js" type="text/javascript"></script>
+</p>
+<style>
+    #maindiv {
+        width: 900px;
+    }
+
+    #input03 {
+        border: 0px solid gray;
+        border-bottom: 1px solid black;
+        color: blue;
+        width: 96px;
+        float: none;
+        padding: 0px 0px 2px 0px;
+        height: 16px;
+    }
+
+    .pay {
+        font-family: monospace;
+        font-size: 14px;
+        font-weight: bold;
+        color: white;
+        padding-top: 2px;
+        cursor: pointer;
+        background: #3385FF;
+        padding-right: 11px;
+        line-height: 21px;
+        vertical-align: -4px;
+    }
+
+    .dragtr {
+        background-color: #fa8072;
+    }
+
+    .borrow {
+        display: none;
+    }
+
+    .zp {
+        display: none;
+    }
+</style>
+<div style="text-align: right; line-height: 30px; height: 30px;">申请单号:${T_FEE_EXPENSE_INVOICE.APP_NO}</div>
+<table align="center" class="normaltbl" border="1">
+    <caption class=" " style="background: #D6E8FC;"><span>北京大学人民医院日常报销申请</span></caption>
+    <tbody>
+        <tr>
+            <td width="15%" class="normaltbltd">申请日期</td>
+            <td width="35%">${T_FEE_EXPENSE_INVOICE.APP_DATE}</td>
+            <td width="15%" class="normaltbltd">申请科室</td>
+            <td width="35%">${T_FEE_EXPENSE_INVOICE.Dept_Name}</td>
+        </tr>
+        <tr>
+            <td class="normaltbltd">申请人</td>
+            <td>[T_FEE_EXPENSE_INVOICE.EMP_ID] [T_FEE_EXPENSE_INVOICE.EMP_NAME]</td>
+            <td class="normaltbltd">所属科室</td>
+            <td>[T_FEE_EXPENSE_INVOICE.Home_Dept_Name]</td>
+        </tr>
+        <tr>
+            <td class="normaltbltd">报销事由</td>
+            <td colspan="3">${T_FEE_EXPENSE_INVOICE.REASON}</td>
+        </tr>
+        <tr>
+            <td class="normaltbltd">费用类型</td>
+            <td id="ExpenseType" colspan="3">${T_FEE_EXPENSE_INVOICE.FEE_TYPE}</td>
+        </tr>
+        <tr>
+            <td class="normaltbltd">支付方式</td>
+            <td id="GB">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>${T_FEE_EXPENSE_INVOICE.PAY_METHOD}</td>
+                            <td><a class="toggle" href="javascript:"><span id="toggleStr">【支付方式说明】</span></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td class="normaltbltd">附件数量</td>
+            <td>${T_FEE_EXPENSE_INVOICE.ATTA_NUM}</td>
+        </tr>
+        <tr>
+            <td class="normaltbltd">支付对象</td>
+            <td id="Supplier" colspan="3">
+                <p>${T_FEE_EXPENSE_INVOICE.PAY_OBJECT}</p>
+                <table>
+                    <tbody>
+                        <tr class="gys" style="display: none;">
+                            <td><span class="gysbtn pay">&nbsp;&nbsp;选择供应商 </span></td>
+                            <td><span class="topqc pay">&nbsp;清除</span></td>
+                            <td><span></span></td>
+                        </tr>
+                        <tr class="ry" style="display: none;">
+                            <td><span class="rybtn pay">&nbsp;&nbsp;选择人员</span></td>
+                            <td><span class="topqc pay">&nbsp;清除</span></td>
+                            <td><span></span></td>
+                        </tr>
+                        <tr class="gysandry" style="display: none;">
+                            <td><span class="gysbtn pay">&nbsp;&nbsp;选择供应商</span></td>
+                            <td><span class="rybtn pay">&nbsp;&nbsp;选择人员</span></td>
+                            <td><span class="topqc pay">&nbsp;清除</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="normaltbltd">报销金额（小写）</td>
+            <td>${T_FEE_EXPENSE_INVOICE.MONEY}</td>
+            <td class="normaltbltd">报销金额（大写）</td>
+            <td>${T_FEE_EXPENSE_INVOICE.Money_Capital}</td>
+        </tr>
+        <tr class="cashierPay" style="display: none;">
+            <td class="normaltbltd Payment">支票/汇票号</td>
+            <td>${T_FEE_EXPENSE_INVOICE.PAY_ACCT_NO}</td>
+            <td class="normaltbltd Payment">记账日期</td>
+            <td>${T_FEE_EXPENSE_INVOICE.ACCOUNT_DATE}</td>
+        </tr>
+        <tr class="cashierPay" id="maxMoney" style="display: none;">
+            <td class="normaltbltd">个税</td>
+            <td colspan="3">${T_FEE_EXPENSE_INVOICE.TAX_MONEY}</td>
+        </tr>
+        <tr class="cashierPay" style="display: none;">
+            <td class="normaltbltd">实付金额</td>
+            <td colspan="3">${T_FEE_EXPENSE_INVOICE.PAY_MONEY}</td>
+        </tr>
+        <tr class="borrow">
+            <td class="normaltbltd" style="background: #fff280;">退还金额</td>
+            <td>${T_FEE_EXPENSE_INVOICE.ReturnAmount}</td>
+            <td class="normaltbltd">支付金额</td>
+            <td>${T_FEE_EXPENSE_INVOICE.PayMoney}</td>
+        </tr>
+        <tr>
+            <td class="normaltbltd">合同单据号</td>
+            <td>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><span id="agreement">${T_FEE_EXPENSE_INVOICE.CONTRACT_ID}</span> <span class="qc pay">&nbsp;清除</span></td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;<a id="lookht" style="cursor: pointer;"></a>【查看合同】</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td class="normaltbltd">合同名称</td>
+            <td>${T_FEE_EXPENSE_INVOICE.CONTRACT_NAME}</td>
+        </tr>
+        <tr class="borrow" style="background: #D6E4F2;">
+            <td colspan="4"><span style="font-family: 微软雅黑,宋体; font-size: 17px; font-weight: bold; margin-left: 12px;">借款申请单</span></td>
+        </tr>
+        <tr class="borrow" style="background: #fff280;">
+            <td class="subtbltd" style="text-align:center;">借款单号</td>
+            <td class="subtbltd" style="text-align:center;">借款事由</td>
+            <td class="subtbltd" style="text-align:center;">借款金额</td>
+            <td class="subtbltd" style="text-align:center;">支付方式</td>
+        </tr>
+        <tr class="borrow">
+            <td>${T_FEE_EXPENSE_INVOICE.DebtCode}</td>
+            <td>${T_FEE_EXPENSE_INVOICE.DebtCause}</td>
+            <td>${T_FEE_EXPENSE_INVOICE.DebtMoney}</td>
+            <td>${T_FEE_EXPENSE_INVOICE.DebtType}</td>
+        </tr>
+        <tr class="zp">
+            <td style="background: #fff280;">支票号</td>
+            <td>${T_FEE_EXPENSE_INVOICE.PAY_ACCT_NO}</td>
+            <td style="background: #fff280;">记账日期</td>
+            <td>${T_FEE_EXPENSE_INVOICE.ACCOUNT_DATE}</td>
+        </tr>
+        <tr>
+            <td class="normaltbltd">备注</td>
+            <td colspan="3">${T_FEE_EXPENSE_INVOICE.REMARK}</td>
+        </tr>
+    </tbody>
+</table>
+<table align="center" class="subtbl" id="T_FEE_FEE_ITEM_EXPENSE" border="1">
+    <caption><span>&nbsp;费用明细</span>&nbsp; &nbsp;<span class="subtblspan" id="addFY" style="font-family: monospace; display: none;">&nbsp;添加费用项</span>&nbsp; &nbsp;<span class="subtblspan" id="addView" style="font-family: monospace; display: none;">&nbsp;查看预算</span></caption>
+    <thead>
+        <tr>
+            <td class="subtbltd" style="width: 30px;">序号</td>
+            <td class="subtbltd kjkm" style="width: 160px; display: none;">会计科目</td>
+            <td class="subtbltd">费用项</td>
+            <td class="subtbltd">项目段</td>
+            <td class="subtbltd">预算项目</td>
+            <td class="subtbltd">预算部门</td>
+            <td class="subtbltd" style="width: 70px;">报销金额</td>
+            <td class="subtbltd" style="width: 70px;">是否超预算</td>
+            <td class="ADDBTN subtbltd" style="width: 30px;"><a title="全部删除" class="subdelbtn" onclick="javascript:DelAll()"></a></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td title="按下鼠标可以上下拖动行" class="dragtd">[LINE_NO]</td>
+            <td class="kjkm" style="display: none;">${ITEM_CODE}</td>
+            <td>${ITEM_ID}${ITEM_COMMENT}${ACCT_COMMENT}<img title="修改费用项" class="fee" style="cursor: pointer; display: none;" onclick="javascript:EditFee(this);" src="../../Img/common/edit.png" /></td>
+            <td>${ISHAVAITEM}${SUB_ITEM_ID}${PROJECT_SECTION}${ACCT_SUB}</td>
+            <td>${BudgetItemName}${BudgetItemCode}</td>
+            <td>${ProjectName}${ProjectCode}${BudgetOrgCode}${BudgetOrgName}</td>
+            <td>${Money}</td>
+            <td>${BudgetType}</td>
+            <td class="DELBTN subtbltd">[#DELBTN#]</td>
+        </tr>
+    </tbody>
+</table>
+<div class="hidden" style="clear: both;">${T_FEE_EXPENSE_INVOICE.DEPT_ID}${T_FEE_EXPENSE_INVOICE.APP_TYPE}${T_FEE_EXPENSE_INVOICE.Hospital_Type}${T_FEE_EXPENSE_INVOICE.STATUS}${T_FEE_EXPENSE_INVOICE.CONTRACT_AUTOID}</div>
+]]></editLayout>
+<formPropertyEvents/>
+<formPropertyStyles>
+<formPropertyStyle name="TOPIC_NAME" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="EBS_NUMBER" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="JJ_SOURSE" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="ERP_NUMBER" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="SOURSE_NUMBER" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="ACCOUNT_DATE" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="APP_DATE" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="APP_ID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="APP_NO" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="APP_TYPE" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="ATTA_NUM" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="CONTRACT_ID" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="CONTRACT_NAME" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="DEBIT_TYPE" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="DEPT_ID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="EBS_STATUS" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="EMP_ID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="EMP_NAME" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="FEE_TYPE" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="FLOW_ID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="IS_REPAY" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="ITEM_SECTION" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="MONEY" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="OPER_ID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="PAY_ACCT_NO" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="PAY_DATE" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="PAY_METHOD" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="PAY_MONEY" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="PAY_NAME" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="PAY_OBJECT" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="REASON" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="REMARK" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="STATUS" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="SYSTEM_ID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="TAX_MONEY" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="TOPIC_ID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="PAY_ACCT_NAME" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="do" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="Dept_Name" visiable="1" editable="1" required="1"/>
+<formPropertyStyle name="Home_Dept_Name" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="Money_Capital" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="HOSPITAL_TYPE" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="Line_No" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="FUND_ID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="CONTRACT_AUTOID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="Hospital_Type" visiable="0" editable="0" required="0"/>
+<formPropertyStyle name="OPER_TYPE" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="TJ" visiable="1" editable="0" required="0"/>
+</formPropertyStyles>
+<formPropertyStyles>
+<formPropertyStyle name="ACCOUNT_DATE" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="TOPIC_NAME" visiable="1" editable="1" required="1"/>
+<formPropertyStyle name="EBS_NUMBER" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="JJ_SOURSE" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="ERP_NUMBER" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="SOURSE_NUMBER" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="DEBIT_TYPE" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="DEPT_ID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="EBS_STATUS" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="EMP_ID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="EMP_NAME" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="FEE_TYPE" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="FLOW_ID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="IS_REPAY" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="ITEM_SECTION" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="MONEY" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="OPER_ID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="PAY_ACCT_NO" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="PAY_DATE" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="PAY_METHOD" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="PAY_MONEY" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="PAY_NAME" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="PAY_OBJECT" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="REASON" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="REMARK" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="STATUS" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="SYSTEM_ID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="TAX_MONEY" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="TOPIC_ID" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="PAY_ACCT_NAME" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="do" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="Dept_Name" visiable="1" editable="1" required="1"/>
+<formPropertyStyle name="Home_Dept_Name" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="Money_Capital" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="HOSPITAL_TYPE" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="Line_No" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="APP_DATE" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="APP_ID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="APP_NO" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="APP_TYPE" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="ATTA_NUM" visiable="1" editable="0" required="1"/>
+<formPropertyStyle name="CONTRACT_ID" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="CONTRACT_NAME" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="FUND_ID" visiable="0" editable="0" required="0"/>
+<formPropertyStyle name="CONTRACT_AUTOID" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="OPER_TYPE" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="TJ" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="add_save" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="Hospital_Type" visiable="0" editable="0" required="0"/>
+<formPropertyStyle name="ReturnAmount" visiable="1" editable="0" required="0"/>
+<formPropertyStyle name="PayMoney" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="DebtCode" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="DebtCause" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="DebtMoney" visiable="1" editable="1" required="0"/>
+<formPropertyStyle name="DebtType" visiable="1" editable="1" required="0"/>
+</formPropertyStyles>
+</form>
+<form>
+<editLayout/>
+<formPropertyEvents/>
+</form>
+<form>
+<editLayout/>
+<formPropertyEvents/>
+</form>
+</forms>
+<businesses>
+<business name="T_FEE_FEE_ITEM_EXPENSE" cnName="费用类型费用项" tableName="T_FEE_FEE_ITEM_EXPENSE">
+<attributes>
+<attribute name="ACCT_SUB" cnName="科目" type="1" length="64" width="" order="3"/>
+<attribute name="ISHAVAITEM" cnName="是否选择项目" type="1" length="22" width="" order="8"/>
+<attribute name="ITEM_CODE" cnName="费用项编码" type="1" length="64" width="" order="9"/>
+<attribute name="ITEM_COMMENT" cnName="费用项说明" type="1" length="200" width="300" order="10"/>
+<attribute name="ITEM_TYPE" cnName="费用类型" type="1" length="64" width="" order="12"/>
+<attribute name="SUB_ITEM_ID" cnName="项目段编码" type="1" length="64" width="" order="15"/>
+<attribute name="LINE_NO" cnName="行号" type="1" length="50" width="" order="16"/>
+<attribute name="PROJECT_SECTION" cnName="项目段说明" type="1" length="50" width="" order="17"/>
+<attribute name="Money" cnName="报销金额" type="3" length="10,2" width="" order="18"/>
+<attribute name="ITEM_ID" cnName="费用项ID" type="1" length="50" width="" order="19"/>
+<attribute name="ACCT_COMMENT" cnName="科目说明" type="1" length="50" width="" order="20"/>
+<attribute name="BudgetItemCode" cnName="预算科目编码" type="1" length="50" width="" order="23"/>
+<attribute name="BudgetItemName" cnName="预算科目" type="1" length="100" width="" order="24"/>
+<attribute name="ProjectCode" cnName="预算项目编码" type="1" length="50" width="" order="25"/>
+<attribute name="ProjectName" cnName="预算项目" type="1" length="300" width="" order="26"/>
+<attribute name="BudgetOrgCode" cnName="预算部门编码" type="1" length="50" width="" order="27"/>
+<attribute name="BudgetOrgName" cnName="预算部门名称" type="1" length="100" width="" order="28"/>
+<attribute name="BudgetType" cnName="是否超预算" type="1" length="50" width="" order="29"/>
+</attributes>
+</business>
+<business name="T_FEE_EXPENSE_INVOICE_PAY" cnName="日常报销-出纳付款" tableName="T_FEE_EXPENSE_INVOICE_PAY">
+<attributes>
+<attribute name="Node" cnName="审批节点" type="1" length="50" width="" order="1"/>
+<attribute name="State" cnName="状态" type="1" length="50" width="" order="2"/>
+<attribute name="NodeYj" cnName="审批意见" type="1" length="50" width="" order="3"/>
+<attribute name="NodeEmpName" cnName="审批人姓名" type="1" length="50" width="" order="4"/>
+<attribute name="NodeEmpNo" cnName="审批人工号" type="1" length="50" width="" order="5"/>
+<attribute name="NodeDate" cnName="审批时间" type="4" length="" width="" order="6"/>
+</attributes>
+</business>
+</businesses>
+</business>

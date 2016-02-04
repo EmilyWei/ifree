@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<business name="T_OA_MT_Rules_Manage" cnName="医疗规章制度管理" tableName="T_OA_MT_Rules_Manage">
+<sqlList><![CDATA[select * from T_OA_MT_Rules_Manage where |^condition^| |^sortdir^|]]></sqlList>
+<sqlEdit><![CDATA[select * from T_OA_MT_Rules_Manage where |^condition^|]]></sqlEdit>
+<attributes>
+<attribute name="DeptName" cnName="科室" type="1" length="50" order="1"/>
+<attribute name="EmployeeName" cnName="姓名" type="1" length="50" order="2"/>
+<attribute name="EmployeeNo" cnName="工号" type="1" length="50" order="3"/>
+<attribute name="Cellphone" cnName="联系电话" type="1" length="50" order="4"/>
+<attribute name="Date" cnName="填写日期" type="4" length="" order="5"/>
+<attribute name="DeptId" cnName="科室id" type="1" length="50" order="7"/>
+<attribute name="Accessories" cnName="上传附件" type="1" length="50" order="8"/>
+<attribute name="CommitteeAccessories" cnName="委员会委员附件上传" type="1" length="50" order="9"/>
+<attribute name="Remark" cnName="备注" type="1" length="50" order="10"/>
+<attribute name="ApplyNo" cnName="申请单号" type="1" length="50" order="11"/>
+<attribute name="PathFlag" cnName="下一个处理人" type="1" length="5" order="13"/>
+<attribute name="Back" cnName="回退" type="1" length="5" order="14"/>
+<attribute name="MedicalAccessories" cnName="医务处附件上传" type="1" length="50" order="15"/>
+<attribute name="MettingAccessories" cnName="院务会附件上传" type="1" length="50" order="16"/>
+</attributes>
+<lists/>
+<forms>
+<form>
+<editLayout><![CDATA[<style><!--
+#input011 {
+	BORDER-BOTTOM: gray solid; BORDER-LEFT: gray 0px solid; PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; WIDTH: 96px;  FLOAT: none; HEIGHT: 16px; COLOR: blue; BORDER-TOP: gray 0px solid; BORDER-RIGHT: gray 0px solid; PADDING-TOP: 0px
+}
+--></style>
+
+<div style="text-align: right; ">申请单号:${T_OA_MT_Rules_Manage.ApplyNo}</div>
+<table class="normaltbl" border="1" align="center" sizset="0" sizcache="2">
+  <caption style="background: #D6E8FC;" class=" ">医疗规章制度申请单</caption>
+<tbody sizset="0" sizcache="2">
+<tr>
+<td style="text-align: center; background: #F6F8F9;" height="25" width="15%">科室</td>
+<td width="35%">${T_OA_MT_Rules_Manage.DeptName}</td>
+<td style="text-align: center; background: #F6F8F9;" height="25" width="15%">姓名</td>
+<td width="35%">${T_OA_MT_Rules_Manage.EmployeeName}</td>
+</tr>
+<tr>
+<td style="text-align: center; background: #F6F8F9;" width="15%">工号</td>
+<td width="35%">${T_OA_MT_Rules_Manage.EmployeeNo}</td>
+<td style="text-align: center; background: #F6F8F9;" width="15%">联系电话</td>
+<td width="35%">${T_OA_MT_Rules_Manage.Cellphone}</td>
+</tr>
+<tr>
+<td style="text-align: center; background: #F6F8F9;" height="25" width="15%">上传附件</td>
+<td width="35%" colspan="3">${T_OA_MT_Rules_Manage.Accessories}</td>
+</tr>
+<tr style="display: none;" class="wyhsc">
+<td style="text-align: center; background: #F6F8F9;" height="25" width="15%">委员会委员附件上传</td>
+<td width="35%" colspan="3">${T_OA_MT_Rules_Manage.CommitteeAccessories}</td>
+</tr>
+<tr style="display: none;" class="ywccl">
+<td style="text-align: center; background: #F6F8F9;" height="25" width="15%">医务处附件上传</td>
+<td width="35%" colspan="3">${T_OA_MT_Rules_Manage.MedicalAccessories}</td>
+</tr>
+<tr>
+<td style="text-align: center; background: #F6F8F9;" height="25" width="15%">备注</td>
+<td width="35%" colspan="3">${T_OA_MT_Rules_Manage.Remark}${T_OA_MT_Rules_Manage.Back}</td>
+</tr>
+  <tr id="trpath" class="hidden">
+<td style="text-align: center; background: #F6F8F9;" height="25" width="15%">下一个处理人</td>
+<td width="35%" colspan="3">${T_OA_MT_Rules_Manage.PathFlag}</td>
+</tr>
+</tbody>
+</table>
+
+<div style="clear: both;" class="hidden">${T_OA_MT_Rules_Manage.DeptId}</div>]]></editLayout>
+<formPropertyEvents/>
+</form>
+</forms>
+<businesses>
+<business name="T_OA_MT_Metting" cnName="上院务会" tableName="T_OA_MT_Metting">
+<attributes>
+<attribute name="ORDER" cnName="序号" type="2" length="" width="" order="1"/>
+<attribute name="EXPLAIN" cnName="说明" type="1" length="50" width="" order="2"/>
+<attribute name="METTINGACCESSORIE" cnName="上传附件" type="1" length="50" width="" order="3"/>
+</attributes>
+</business>
+</businesses>
+</business>

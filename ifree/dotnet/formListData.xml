@@ -1,0 +1,46 @@
+<xml>
+	<root>
+		<Table TableName="T_BC_WordSort" Sindex="">
+			<row id="" state="Unchanged">
+				<_AutoID><![CDATA[b2bf5e1c-f8ed-4245-a6bf-501f134514de]]></_AutoID>
+				<_UserName><![CDATA[117eb0b3-6e30-460b-b18b-e2f7b2f4ce9a]]></_UserName>
+				<_OrgCode><![CDATA[000010004]]></_OrgCode>
+				<_CreateTime><![CDATA[2013/9/5 9:58:54]]></_CreateTime>
+				<_UpdateTime><![CDATA[2013/9/5 9:59:30]]></_UpdateTime>
+				<_IsDel><![CDATA[0]]></_IsDel>
+				<_CompanyID><![CDATA[6A5DF65B-F037-4EF8-B4E2-9EF8B19C0339]]></_CompanyID>
+				<_WFState><![CDATA[]]>
+				</_WFState>
+				<_GDState><![CDATA[]]>
+				</_GDState>
+				<WordSortName><![CDATA[木工]]></WordSortName>
+				<WordSortCode><![CDATA[mg]]></WordSortCode>
+				<active><![CDATA[1]]></active>
+				<WordSortPCode><![CDATA[0]]></WordSortPCode>
+				<OrderID><![CDATA[0]]></OrderID>
+				<_WFCurNode />
+				<_WFCurUser />
+			</row>
+		</Table>
+		<Table TableName="T_BC_WordSort_sub1">
+			<row id="SubTbl00_0_" state="Unchanged" order="">
+				<_AutoID><![CDATA[4b7a734d-1bed-4412-b9a0-6297d1b7fa2c]]></_AutoID>
+				<_UserName><![CDATA[117eb0b3-6e30-460b-b18b-e2f7b2f4ce9a]]></_UserName>
+				<_OrgCode><![CDATA[000010004]]></_OrgCode>
+				<_CreateTime><![CDATA[2013/9/5 9:58:54]]></_CreateTime>
+				<_UpdateTime><![CDATA[2013/9/5 9:58:54]]></_UpdateTime>
+				<_IsDel><![CDATA[0]]></_IsDel>
+				<_MainID />
+				<_MainTbl />
+				<unitName><![CDATA[第二分公司]]></unitName>
+				<WordSortID />
+				<active><![CDATA[1]]></active>
+				<WordSortName />
+				<Remarks><![CDATA[]]>
+				</Remarks>
+				<unitID><![CDATA[cb2b49cb-a588-42ff-9d04-1b7de5ea95b4]]></unitID>
+				<_RowNo />
+			</row>
+		</Table>
+	</root>
+</xml>

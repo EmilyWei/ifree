@@ -1,0 +1,68 @@
+<xml>
+	<root>
+		<Table TableName="OA_QINGJIA" Sindex="">
+			<row id="" state="Unchanged">
+				<_AutoID><![CDATA[ef7a96fa-b71f-49d8-87e2-b9a4174b5a4f]]></_AutoID>
+				<_UserName><![CDATA[b0a509bc-cbff-4599-9bdf-6772d87b64a3]]></_UserName>
+				<_OrgCode><![CDATA[00014]]></_OrgCode>
+				<_CreateTime><![CDATA[2016/1/8 10:58:25]]></_CreateTime>
+				<_UpdateTime><![CDATA[2016/1/8 10:58:25]]></_UpdateTime>
+				<_IsDel><![CDATA[0]]></_IsDel>
+				<_CompanyID><![CDATA[6A5DF65B-F037-4EF8-B4E2-9EF8B19C0339]]></_CompanyID>
+				<_WFState><![CDATA[终止]]></_WFState>
+				<_GDState><![CDATA[]]>
+				</_GDState>
+				<_WFCurNode />
+				<_WFCurUser />
+				<EMPLOYNAME><![CDATA[王志强]]></EMPLOYNAME>
+				<EMPLOYN0><![CDATA[04046]]></EMPLOYN0>
+				<DEPTID><![CDATA[303]]></DEPTID>
+				<DEPTNAME><![CDATA[党委院长办公室]]></DEPTNAME>
+				<STARTDATE><![CDATA[2016-01-08 10:59]]></STARTDATE>
+				<ENDDATE><![CDATA[2016-01-11 10:59]]></ENDDATE>
+				<QJTYPE><![CDATA[寒暑假]]></QJTYPE>
+				<USERDESC><![CDATA[1]]></USERDESC>
+				<APDESC><![CDATA[]]>
+				</APDESC>
+				<TASKID><![CDATA[]]>
+				</TASKID>
+				<PROCESSID><![CDATA[]]>
+				</PROCESSID>
+				<HEADTYPE><![CDATA[个人请（休）假]]></HEADTYPE>
+				<WCLOCATION><![CDATA[是]]></WCLOCATION>
+				<QHNO><![CDATA[QJ1601080002]]></QHNO>
+				<STATUS><![CDATA[1]]></STATUS>
+				<CREATEDATE><![CDATA[]]>
+				</CREATEDATE>
+				<WORKNAME><![CDATA[]]>
+				</WORKNAME>
+				<DATESUM><![CDATA[]]>
+				</DATESUM>
+				<YYEARDATE><![CDATA[15.0]]></YYEARDATE>
+				<SYEARDATE><![CDATA[12天5小时]]></SYEARDATE>
+				<DATELENGT><![CDATA[]]>
+				</DATELENGT>
+				<TXJTYPE><![CDATA[]]>
+				</TXJTYPE>
+				<QINGJIASUM><![CDATA[]]>
+				</QINGJIASUM>
+				<CALCULATESUM><![CDATA[1天1小时]]></CALCULATESUM>
+				<DO><![CDATA[]]>
+				</DO>
+				<MARK><![CDATA[]]>
+				</MARK>
+				<DEPUTY><![CDATA[]]>
+				</DEPUTY>
+				<CHOOSEDZBPLANID><![CDATA[]]>
+				</CHOOSEDZBPLANID>
+				<THISYEAR><![CDATA[2016]]></THISYEAR>
+				<LASTYEAR><![CDATA[2015]]></LASTYEAR>
+				<YYEARDATELY><![CDATA[0.0]]></YYEARDATELY>
+				<SYEARDATELY><![CDATA[0天]]></SYEARDATELY>
+				<NEXTYEAR><![CDATA[2017]]></NEXTYEAR>
+				<YYEARDATENY><![CDATA[0.0]]></YYEARDATENY>
+				<SYEARDATENY><![CDATA[0天]]></SYEARDATENY>
+			</row>
+		</Table>
+	</root>
+</xml>

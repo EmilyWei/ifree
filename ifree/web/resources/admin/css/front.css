@@ -1,0 +1,120 @@
+.formS004 ul{
+	height:auto;
+	line-height:33px;
+	overflow:hidden;
+	margin-bottom:15px;
+}
+.formS004 ul li{
+	float:left;
+	width:120px;
+	height:33px;
+	line-height:33px;
+}
+.formS004 ul .title{
+	width:175px;
+	text-align:right;
+	margin-right:10px;
+}
+
+.tableS002,.tableS003{
+	width:90%;
+	text-align:center;
+	line-height:40px;
+}
+.tableS002 th,.tableS003 th{
+	background:#f5f5f5;
+	white-space:nowrap;
+	text-align:center;
+}
+.tableS002 td,.tableS003 td{
+	padding:0 20px;
+	white-space:normal;
+}
+.tableS002, .tableS002 th, .tableS002 td,.tableS003, .tableS003 th, .tableS003 td{
+	border:1px solid #e5e5e5;
+	border-collapse:collapse;
+}
+.onliny{
+	color:#ccc;
+}
+.tableS002 td input[type="text"]{
+	border:none;
+	width:320px;
+	height:30px;
+	line-height:30px;
+	border:1px solid #ccc;
+	border-radius:4px; 
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+	padding:0 10px;
+	font-family:"Î¢ÈíÑÅºÚ";
+	font-size:12px;
+	color:#333;	
+}	
+
+.tableS003 td input[type="text"]{
+	border:none;
+	width:200px;
+	height:30px;
+	line-height:30px;
+	border:1px solid #ccc;
+	border-radius:4px; 
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+	padding:0 10px;
+	font-family:"Î¢ÈíÑÅºÚ";
+	font-size:12px;
+	color:#333;	
+}
+
+.formS01 .btnInfo{background:#c5a629;}
+.formS01 .btnInfo:hover{background:#caae2e;}
+.formS01 input[type="password"]{
+	border:none;
+	width:380px;
+	height:33px;
+	line-height:33px;
+	border:1px solid #ccc;
+	border-radius:4px; 
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+	padding:0 10px;
+	font-family:"Î¢ÈíÑÅºÚ";
+	font-size:12px;
+	color:#333;	
+}
+#tab3 .tips{width:650px;}
+#tab3 ul{margin-bottom:50px;}
+
+input.fieldError {
+	border: 1px solid #ff0000;
+	background-color: #fffbf5;
+}
+select.fieldError {
+	border: 1px solid #ff0000;
+	background-color: #fffbf5;
+}
+
+label.fieldError {
+	line-height: 23px;
+	color: #ff0000;
+	padding-left: 6px;
+}
+
+.tableS011{
+	width:100%;
+	text-align:center;
+}
+.tableS011 th{
+	background:#f5f5f5;
+	white-space:nowrap;
+	padding:7px;
+}
+.tableS011 td{
+	padding:7px;
+	white-space:normal;
+}
+.tableS011, .tableS011 th, .tableS011 td{
+	border:1px solid #e5e5e5;
+	border-collapse:collapse;
+}

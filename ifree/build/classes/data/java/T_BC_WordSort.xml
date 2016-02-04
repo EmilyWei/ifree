@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<business name="T_BC_WordSort" cnName="工种主表" tableName="T_BC_WordSort">
+<sqlList><![CDATA[select * from T_BC_WordSort where |^condition^| |^sortdir^|]]></sqlList>
+<sqlEdit><![CDATA[select * from T_BC_WordSort where |^condition^|]]></sqlEdit>
+<attributes>
+<attribute name="WordSortName" cnName="工种名称" type="1" length="200" order="1"/>
+<attribute name="WordSortCode" cnName="工种编码" type="1" length="50" order="2"/>
+<attribute name="active" cnName="是否启用" type="2" length="" order="3"/>
+<attribute name="WordSortPCode" cnName="工种上级编码" type="1" length="50" order="4"/>
+<attribute name="OrderID" cnName="排序编号" type="2" length="" order="5"/>
+</attributes>
+<lists/>
+<forms>
+<form>
+<editLayout><![CDATA[<table class="normaltbl" border="1"><caption>工种主表</caption>
+<tbody>
+<tr>
+<td width="20%">工种名称</td>
+<td width="30%">${T_BC_WordSort.WordSortName}</td>
+<td width="20%">工种编码</td>
+<td>${T_BC_WordSort.WordSortCode}</td>
+</tr>
+<tr>
+<td>是否启用</td>
+<td>${T_BC_WordSort.active}</td>
+<td>工种上级编码</td>
+<td>${T_BC_WordSort.WordSortPCode}</td>
+</tr>
+<tr>
+<td>排序编号</td>
+<td>${T_BC_WordSort.OrderID}</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p style="line-height: 5px; height: 4px; clear: both; font-size: 4px;">&nbsp;</p>
+<table id="T_BC_WordSort_sub1" class="subtbl" border="1">
+<thead>
+<tr>
+<td colspan="2">单位描述</td>
+<td colspan="2">单位名称</td>
+<td>是否启用</td>
+<td class="ADDBTN">[#ADDBTN#]</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="2">${Remarks}</td>
+<td colspan="2">${unitName}${unitID}</td>
+<td>${active}</td>
+<td class="DELBTN">[#DELBTN#]</td>
+</tr>
+</tbody>
+</table>]]></editLayout>
+<formPropertyEvents/>
+</form>
+</forms>
+<businesses>
+<business name="T_BC_WordSort_sub1" cnName="工种子表" tableName="T_BC_WordSort_sub1">
+<attributes>
+<attribute name="unitName" cnName="单位名称" type="1" length="200" width="" order="1"/>
+<attribute name="active" cnName="是否启用" type="2" length="" width="" order="3"/>
+<attribute name="Remarks" cnName="单位描述" type="1" length="50" width="" order="5"/>
+<attribute name="unitID" cnName="单位ID" type="1" length="50" width="" order="6"/>
+</attributes>
+</business>
+</businesses>
+</business>

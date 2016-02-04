@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<business name="FEE_FEE_ITEM" cnName="科研药品费用项" tableName="FEE_FEE_ITEM">
+<sqlList><![CDATA[select * from FEE_FEE_ITEM where |^condition^| |^sortdir^|]]></sqlList>
+<sqlEdit><![CDATA[select * from FEE_FEE_ITEM where |^condition^|]]></sqlEdit>
+<attributes>
+<attribute name="ACCT_CODE" cnName="账户编码" type="1" length="64" order="1"/>
+<attribute name="ACCT_COMMNET" cnName="账户说明" type="1" length="200" order="2"/>
+<attribute name="ACCT_SUB" cnName="科目" type="1" length="64" order="3"/>
+<attribute name="DEPT_ID" cnName="科室ID" type="1" length="64" order="4"/>
+<attribute name="DEPT_TYPE_CODE" cnName="科室类型" type="1" length="64" order="5"/>
+<attribute name="DEPT_TYPE_ID" cnName="科室类型ID" type="1" length="64" order="6"/>
+<attribute name="FUND_ID" cnName="基金来源ID" type="1" length="64" order="7"/>
+<attribute name="ISHAVAITEM" cnName="是否选择项目" type="1" length="22" order="8"/>
+<attribute name="ITEM_CODE" cnName="会计科目" type="1" length="64" order="9"/>
+<attribute name="ITEM_COMMENT" cnName="费用项" type="1" length="200" order="10"/>
+<attribute name="ITEM_ID" cnName="主键" type="1" length="64" order="11"/>
+<attribute name="ITEM_TYPE" cnName="费用类型" type="1" length="64" order="12"/>
+<attribute name="ORDER_ID" cnName="排序" type="2" length="" order="13"/>
+<attribute name="STATUS" cnName="状态" type="1" length="22" order="14"/>
+<attribute name="SUB_ITEM_ID" cnName="子项目编码" type="1" length="64" order="15"/>
+<attribute name="CZ" cnName="操作" type="1" length="50" order="16"/>
+<attribute name="BudgetCodes" cnName="预算科目Code" type="1" length="100" order="17"/>
+<attribute name="BudgetItems" cnName="预算科目" type="1" length="500" order="18"/>
+</attributes>
+<lists/>
+<forms>
+<form>
+<editLayout><![CDATA[<style type="text/css">
+    #maindiv
+    {
+        width: 900px;
+    }
+</style>
+<table class="normaltbl" border="1" align="center">
+    <caption style="background: #D6E8FC;" class=" "><span>费用项</span></caption>
+    <tbody>
+        <tr>
+            <td width="15%" class="normaltbltd">会计科目</td>
+            <td width="35%">${FEE_FEE_ITEM.ITEM_CODE}</td>
+            <td width="15%" class="normaltbltd">费用项</td>
+            <td width="35%">${FEE_FEE_ITEM.ITEM_COMMENT}</td>
+        </tr>
+        <tr>
+            <td width="15%" class="normaltbltd">预算科目</td>
+            <td colspan='3'>${FEE_FEE_ITEM.BudgetItems}${FEE_FEE_ITEM.BudgetCodes}</td>
+        </tr>
+        <tr>
+            <td class="normaltbltd">费用类型</td>
+            <td>${FEE_FEE_ITEM.ITEM_TYPE}</td>
+            <td class="normaltbltd">科室类型</td>
+            <td>${FEE_FEE_ITEM.DEPT_TYPE_CODE}</td>
+        </tr>
+        <tr>
+            <td class="normaltbltd">明细名称</td>
+            <td colspan='3'>${FEE_FEE_ITEM.ACCT_COMMNET}</td>
+        </tr>
+        <tr>
+            <td class="normaltbltd">是否有子目</td>
+            <td colspan='3'>${FEE_FEE_ITEM.ISHAVAITEM}</td>
+        </tr>
+        <tr>
+            <td class="normaltbltd">子目</td>
+            <td colspan='3'>${FEE_FEE_ITEM.SUB_ITEM_ID}</td>
+        </tr>
+        <tr>
+            <td class="normaltbltd">基金来源</td>
+            <td colspan='3'><div id="tip"></div></td>
+        </tr>
+    </tbody>
+</table>
+<div class="hidden" style="clear: both;">${FEE_FEE_ITEM.FUND_ID}</div>]]></editLayout>
+<formPropertyEvents/>
+</form>
+</forms>
+<businesses/>
+</business>
